@@ -84,6 +84,13 @@ window.customElements.define(
 
           console.log(e);
       }, false);
+
+      window.addEventListener('sunmi_shortcut_key', (e) => {
+          const output = self.shadowRoot.querySelector('#output');
+          output.innerHTML = "<b>sunmi_shortcut_key:</b><br><pre>" + JSON.stringify(e, null, 3) + "</pre><hr>" + output.innerHTML;
+
+          console.log(e);
+      }, false);
     }
   }
 );

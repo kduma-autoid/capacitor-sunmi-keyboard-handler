@@ -18,6 +18,7 @@ public class SunmiKeyboardHandlerPlugin extends Plugin {
 
         activity.registerKeyHandler(new SunmiKeyboardKeyHandler(getBridge()));
         activity.registerKeyHandler(new SunmiBarcodeScannerKeyHandler(getBridge()));
+        activity.registerKeyHandler(new SunmiL2sShortcutKeyHandler(getBridge()));
     }
 
     @PluginMethod

@@ -46,7 +46,7 @@ public class SunmiBarcodeScannerKeyHandler implements KeyHandlerInterface {
     private ArrayMap<Integer, ScanBuffer> buffers = new ArrayMap<Integer, ScanBuffer>();
 
     @Override
-    public boolean handle(KeyEvent event) {
+    public synchronized boolean handle(KeyEvent event) {
         InputDevice device = event.getDevice();
         int device_id = device.getId();
 
