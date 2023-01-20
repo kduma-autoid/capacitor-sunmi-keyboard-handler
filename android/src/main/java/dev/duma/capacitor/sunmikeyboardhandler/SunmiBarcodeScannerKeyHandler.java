@@ -70,6 +70,9 @@ public class SunmiBarcodeScannerKeyHandler implements KeyHandlerInterface {
             return true;
 
         if(event.getKeyCode() == KEYCODE_ENTER) {
+            if(!buffers.containsKey(device_id))
+                return true;
+
             try {
                 JSONObject json = new JSONObject();
                 json.put("barcode", buffers.get(device_id).getBuffer());
