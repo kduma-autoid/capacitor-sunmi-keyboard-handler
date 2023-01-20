@@ -8,8 +8,17 @@ import com.getcapacitor.annotation.CapacitorPlugin;
 
 @CapacitorPlugin(name = "SunmiKeyboardHandler")
 public class SunmiKeyboardHandlerPlugin extends Plugin {
-
     private SunmiKeyboardHandler implementation = new SunmiKeyboardHandler();
+
+    @Override
+    public void load() {
+        super.load();
+
+        HasKeyHandlersInterface activity = (HasKeyHandlersInterface) getActivity();
+
+        activity.registerKeyHandler(new SunmiKeyboardKeyHandler(getBridge()));
+        activity.registerKeyHandler(new SunmiBarcodeScannerKeyHandler(getBridge()));
+    }
 
     @PluginMethod
     public void echo(PluginCall call) {
