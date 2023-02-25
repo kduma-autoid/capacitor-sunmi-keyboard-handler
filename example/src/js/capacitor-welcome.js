@@ -57,7 +57,7 @@ window.customElements.define(
     </style>
     <div>
       <capacitor-welcome-titlebar>
-        <h1>@kduma-sunmi/capacitor-sunmi-keyboard-handler</h1>
+        <h1>@kduma-autoid/capacitor-sunmi-keyboard-handler</h1>
       </capacitor-welcome-titlebar>
       <main>
         <input name="test"/>

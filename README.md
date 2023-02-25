@@ -1,11 +1,11 @@
-# @kduma-sunmi/capacitor-sunmi-keyboard-handler
+# @kduma-autoid/capacitor-sunmi-keyboard-handler
 
 Handler for processing input from Sunmi hardware barcode scanners (builtin and external) and external Sunmi programmable keyboard.
 
 ## Install
 
 ```bash
-npm install @kduma-sunmi/capacitor-sunmi-keyboard-handler
+npm install @kduma-autoid/capacitor-sunmi-keyboard-handler
 npx cap sync
 ```
 

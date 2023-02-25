@@ -1,5 +1,5 @@
 {
-  "name": "@kduma-sunmi/capacitor-sunmi-keyboard-handler",
+  "name": "@kduma-autoid/capacitor-sunmi-keyboard-handler",
   "version": "0.0.3",
   "description": "Handler for processing input from Sunmi hardware barcode scanners (builtin and external) and external Sunmi programmable keyboard.",
   "main": "dist/plugin.cjs.js",
@@ -17,10 +17,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kduma-sunmi/capacitor-sunmi-keyboard-handler.git"
+    "url": "git+https://github.com/kduma-autoid/capacitor-sunmi-keyboard-handler.git"
   },
   "bugs": {
-    "url": "https://github.com/kduma-sunmi/capacitor-sunmi-keyboard-handler/issues"
+    "url": "https://github.com/kduma-autoid/capacitor-sunmi-keyboard-handler/issues"
   },
   "keywords": [
     "capacitor",
