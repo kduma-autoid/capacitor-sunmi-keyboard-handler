@@ -1,6 +1,8 @@
 package dev.duma.capacitor.sunmikeyboardhandler.handlers;
 
+import static android.view.KeyEvent.ACTION_DOWN;
 import static android.view.KeyEvent.ACTION_UP;
+import static android.view.KeyEvent.KEYCODE_DPAD_DOWN;
 import static android.view.KeyEvent.KEYCODE_ENTER;
 
 import android.util.ArrayMap;
@@ -69,13 +71,13 @@ public class SunmiBarcodeScannerKeyHandler implements KeyHandlerInterface {
             return false;
         }
 
-        if(event.getAction() != ACTION_UP)
+        if(event.getAction() != ACTION_DOWN)
             return true;
 
         if(KeyEvent.isModifierKey(event.getKeyCode()))
             return true;
 
-        if(event.getKeyCode() == KEYCODE_ENTER) {
+        if(event.getKeyCode() == KEYCODE_ENTER || event.getKeyCode() == KEYCODE_DPAD_DOWN) {
             if(!buffers.containsKey(device_id))
                 return true;
 
@@ -90,7 +92,12 @@ public class SunmiBarcodeScannerKeyHandler implements KeyHandlerInterface {
             buffers.remove(device_id);
         }
 
-        String pressed_value = Character.toString((char) event.getUnicodeChar());
+        char c = (char) event.getUnicodeChar();
+
+        if (c == 0)
+            return true;
+
+        String pressed_value = Character.toString(c);
 
         if (buffers.containsKey(device_id)){
             buffers.get(device_id).appendBuffer(pressed_value);
