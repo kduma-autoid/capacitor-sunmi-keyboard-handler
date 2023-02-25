@@ -72,6 +72,11 @@ window.customElements.define(
     async connectedCallback() {
       const self = this;
 
+      const debug_handler = (e) => {
+        const output = self.shadowRoot.querySelector('#output');
+        output.innerHTML = "<b>debug_handler:</b><br><pre>" + JSON.stringify(e, null, 3) + "</pre><hr>" + output.innerHTML;
+      }
+
       const barcode_scan_handler = (e) => {
         const output = self.shadowRoot.querySelector('#output');
         output.innerHTML = "<b>barcode_scan_handler:</b><br><pre>" + JSON.stringify(e, null, 3) + "</pre><hr>" + output.innerHTML;
@@ -88,6 +93,7 @@ window.customElements.define(
       }
 
       await Promise.all([
+        SunmiKeyboardHandler.setDebugHandler(debug_handler),
         SunmiKeyboardHandler.setBarcodeHandler(barcode_scan_handler),
         SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.L2s_Shortcut_or_RFID }, shortcut_key_handler),
         SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.Esc }, keyboard_press_handler),

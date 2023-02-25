@@ -19,6 +19,7 @@ import java.util.Objects;
 
 import dev.duma.capacitor.sunmikeyboardhandler.enums.HandleableKeyEnum;
 import dev.duma.capacitor.sunmikeyboardhandler.enums.KeyEventEnum;
+import dev.duma.capacitor.sunmikeyboardhandler.handlers.DebugKeyHandler;
 import dev.duma.capacitor.sunmikeyboardhandler.handlers.SunmiBarcodeScannerKeyHandler;
 import dev.duma.capacitor.sunmikeyboardhandler.handlers.SunmiKeyboardKeyHandler;
 import dev.duma.capacitor.sunmikeyboardhandler.handlers.SunmiL2sShortcutKeyHandler;
@@ -132,6 +133,10 @@ public class SunmiKeyboardHandlerPlugin extends Plugin implements KeyHandlerInte
             case Barcode:
                 call.reject("Barcode handler is not settable using this method");
                 break;
+
+            case Debug:
+                call.reject("Debug handler is not settable using this method");
+                break;
         }
 
     }
@@ -208,6 +213,55 @@ public class SunmiKeyboardHandlerPlugin extends Plugin implements KeyHandlerInte
         }
 
         keyHandlers.remove(HandleableKeyEnum.Barcode);
+
+        call.resolve();
+    }
+
+    private String DebugHandlerCallbackId = null;
+
+    @Nullable
+    protected PluginCall getDebugHandlerCall() {
+        if (DebugHandlerCallbackId == null)
+            return null;
+
+        return bridge.getSavedCall(DebugHandlerCallbackId);
+    }
+
+    @PluginMethod(returnType = PluginMethod.RETURN_CALLBACK)
+    public void setDebugHandler(PluginCall call) {
+        if (DebugHandlerCallbackId != null) {
+            call.reject("Debug handler already set");
+            return;
+        }
+
+        DebugHandlerCallbackId = call.getCallbackId();
+        call.setKeepAlive(true);
+        bridge.saveCall(call);
+
+        DebugKeyHandler handler = new DebugKeyHandler((event) -> {
+            PluginCall c = getDebugHandlerCall();
+
+            if (c == null)
+                return;
+
+            JSObject data = new JSObject();
+
+            data.put("event", event.toString());
+
+            c.resolve(data);
+        });
+
+        keyHandlers.put(HandleableKeyEnum.Debug, new Pair<>(DebugHandlerCallbackId, handler));
+    }
+
+    @PluginMethod()
+    public void removeDebugHandler(PluginCall call) {
+        if (DebugHandlerCallbackId != null) {
+            bridge.releaseCall(DebugHandlerCallbackId);
+            DebugHandlerCallbackId = null;
+        }
+
+        keyHandlers.remove(HandleableKeyEnum.Debug);
 
         call.resolve();
     }

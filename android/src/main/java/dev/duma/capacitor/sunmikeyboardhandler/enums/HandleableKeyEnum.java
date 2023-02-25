@@ -44,7 +44,9 @@ public enum HandleableKeyEnum implements Labeled {
 
     L2s_Shortcut_or_RFID("L2S_SHORTCUT_OR_RFID"),
 
-    Barcode("BARCODE");
+    Barcode("BARCODE"),
+
+    Debug("DEBUG");
 
     private static final Map<String, HandleableKeyEnum> BY_LABEL = new HashMap<>();
 

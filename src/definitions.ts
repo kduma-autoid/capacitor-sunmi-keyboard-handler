@@ -35,6 +35,7 @@ export enum KeyEvent {
 
 export type KeyHandlerCallback = (data: { key: HandleableKey, modifiers: ModifierKey[], type: KeyEvent }) => void;
 export type BarcodeHandlerCallback = (data: { barcode: string, device: { type: string, id: number } }) => void;
+export type DebugHandlerCallback = (data: any ) => void;
 
 export interface SunmiKeyboardHandlerPlugin {
   setKeyHandler(options: { key: HandleableKey }, callback: KeyHandlerCallback): Promise<CallbackID>;
@@ -42,4 +43,7 @@ export interface SunmiKeyboardHandlerPlugin {
 
   setBarcodeHandler(callback: BarcodeHandlerCallback): Promise<CallbackID>;
   removeBarcodeHandler(): Promise<void>;
+
+  setDebugHandler(callback: DebugHandlerCallback): Promise<CallbackID>;
+  removeDebugHandler(): Promise<void>;
 }
