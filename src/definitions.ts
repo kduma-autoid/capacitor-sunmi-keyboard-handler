@@ -38,12 +38,33 @@ export type BarcodeHandlerCallback = (data: { barcode: string, device: { type: s
 export type DebugHandlerCallback = (data: any ) => void;
 
 export interface SunmiKeyboardHandlerPlugin {
+  /**
+   * Set a callback to be called when a key specified in `key` parameter is pressed.
+   */
   setKeyHandler(options: { key: HandleableKey }, callback: KeyHandlerCallback): Promise<CallbackID>;
+
+  /**
+   * Remove a callback set by `setKeyHandler` for a key specified in `key` parameter.
+   */
   removeKeyHandler(options: { key: HandleableKey }): Promise<void>;
 
+  /**
+   * Set a callback to be called when a barcode is scanned.
+   */
   setBarcodeHandler(callback: BarcodeHandlerCallback): Promise<CallbackID>;
+
+  /**
+   * Remove a callback set by `setBarcodeHandler`.
+   */
   removeBarcodeHandler(): Promise<void>;
 
+  /**
+   * Set a callback to be called when any unhandled key is pressed.
+   */
   setDebugHandler(callback: DebugHandlerCallback): Promise<CallbackID>;
+
+  /**
+   * Remove a callback set by `setDebugHandler`.
+   */
   removeDebugHandler(): Promise<void>;
 }
