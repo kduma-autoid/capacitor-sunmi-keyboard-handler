@@ -1,13 +1,32 @@
 import { WebPlugin } from '@capacitor/core';
 
-import type { SunmiKeyboardHandlerPlugin } from './definitions';
+import type { CallbackID, SunmiKeyboardHandlerPlugin } from './definitions';
 
 export class SunmiKeyboardHandlerWeb
   extends WebPlugin
   implements SunmiKeyboardHandlerPlugin
 {
-  async echo(options: { value: string }): Promise<{ value: string }> {
-    console.log('ECHO', options);
-    return options;
+  removeBarcodeHandler(): Promise<void> {
+    throw this.unimplemented('Not implemented on web.');
+  }
+
+  removeDebugHandler(): Promise<void> {
+    throw this.unimplemented('Not implemented on web.');
+  }
+
+  removeKeyHandler(): Promise<void> {
+    throw this.unimplemented('Not implemented on web.');
+  }
+
+  setBarcodeHandler(): Promise<CallbackID> {
+    throw this.unimplemented('Not implemented on web.');
+  }
+
+  setDebugHandler(): Promise<CallbackID> {
+    throw this.unimplemented('Not implemented on web.');
+  }
+
+  setKeyHandler(): Promise<CallbackID> {
+    throw this.unimplemented('Not implemented on web.');
   }
 }
