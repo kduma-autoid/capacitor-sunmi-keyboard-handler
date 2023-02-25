@@ -120,9 +120,8 @@ public class SunmiKeyboardHandlerPlugin extends Plugin implements KeyHandlerInte
                     JSObject data = new JSObject();
 
                     data.put("key", HandleableKeyEnum.L2s_Shortcut_or_RFID.toString());
-                    JSObject d = new JSObject();
-                    d.put("modifiers", new JSONArray());
-                    d.put("type", pressed ? KeyEventEnum.KeyDown.toString() : KeyEventEnum.KeyUp.toString());
+                    data.put("modifiers", new JSONArray());
+                    data.put("type", pressed ? KeyEventEnum.KeyDown.toString() : KeyEventEnum.KeyUp.toString());
 
                     c.resolve(data);
                 });
