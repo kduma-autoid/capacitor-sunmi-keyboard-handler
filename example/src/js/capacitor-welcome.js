@@ -1,5 +1,6 @@
 import { SplashScreen } from '@capacitor/splash-screen';
-import { Camera } from '@capacitor/camera';
+import { SunmiKeyboardHandler } from '@kduma-autoid/capacitor-sunmi-keyboard-handler';
+import { HandleableKey } from '../../../src';
 
 window.customElements.define(
   'capacitor-welcome',
@@ -68,29 +69,45 @@ window.customElements.define(
     `;
     }
 
-    connectedCallback() {
+    async connectedCallback() {
       const self = this;
 
-      window.addEventListener('sunmi_keyboard_press', (e) => {
-          const output = self.shadowRoot.querySelector('#output');
-          output.innerHTML = "<b>sunmi_keyboard_press:</b><br><pre>" + JSON.stringify(e, null, 3) + "</pre><hr>" + output.innerHTML;
+      const barcode_scan_handler = (e) => {
+        const output = self.shadowRoot.querySelector('#output');
+        output.innerHTML = "<b>barcode_scan_handler:</b><br><pre>" + JSON.stringify(e, null, 3) + "</pre><hr>" + output.innerHTML;
+      }
 
-          console.log(e);
-      }, false);
+      const shortcut_key_handler = (e) => {
+        const output = self.shadowRoot.querySelector('#output');
+        output.innerHTML = "<b>shortcut_key_handler:</b><br><pre>" + JSON.stringify(e, null, 3) + "</pre><hr>" + output.innerHTML;
+      }
 
-      window.addEventListener('sunmi_barcode_scan', (e) => {
-          const output = self.shadowRoot.querySelector('#output');
-          output.innerHTML = "<b>sunmi_barcode_scan:</b><br><pre>" + JSON.stringify(e, null, 3) + "</pre><hr>" + output.innerHTML;
+      const keyboard_press_handler = (e) => {
+        const output = self.shadowRoot.querySelector('#output');
+        output.innerHTML = "<b>keyboard_press_handler:</b><br><pre>" + JSON.stringify(e, null, 3) + "</pre><hr>" + output.innerHTML;
+      }
 
-          console.log(e);
-      }, false);
-
-      window.addEventListener('sunmi_shortcut_key', (e) => {
-          const output = self.shadowRoot.querySelector('#output');
-          output.innerHTML = "<b>sunmi_shortcut_key:</b><br><pre>" + JSON.stringify(e, null, 3) + "</pre><hr>" + output.innerHTML;
-
-          console.log(e);
-      }, false);
+      await Promise.all([
+        SunmiKeyboardHandler.setBarcodeHandler(barcode_scan_handler),
+        SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.L2s_Shortcut_or_RFID }, shortcut_key_handler),
+        SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.Esc }, keyboard_press_handler),
+        SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.F1 }, keyboard_press_handler),
+        SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.F2 }, keyboard_press_handler),
+        SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.F3 }, keyboard_press_handler),
+        SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.F4 }, keyboard_press_handler),
+        SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.F5 }, keyboard_press_handler),
+        SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.F6 }, keyboard_press_handler),
+        SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.F7 }, keyboard_press_handler),
+        SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.F8 }, keyboard_press_handler),
+        SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.F9 }, keyboard_press_handler),
+        SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.F10 }, keyboard_press_handler),
+        SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.Delete }, keyboard_press_handler),
+        SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.Home }, keyboard_press_handler),
+        SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.End }, keyboard_press_handler),
+        SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.PgUp }, keyboard_press_handler),
+        SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.PgDn }, keyboard_press_handler),
+        SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.Cash }, keyboard_press_handler),
+      ]);
     }
   }
 );

@@ -1,4 +1,4 @@
-package dev.duma.capacitor.sunmikeyboardhandler;
+package dev.duma.capacitor.sunmikeyboardhandler.handlers;
 
 import static android.view.KeyEvent.ACTION_UP;
 import static android.view.KeyEvent.KEYCODE_ENTER;
@@ -12,11 +12,17 @@ import com.getcapacitor.Bridge;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class SunmiBarcodeScannerKeyHandler implements KeyHandlerInterface {
-    protected Bridge bridge;
+import dev.duma.capacitor.sunmikeyboardhandler.KeyHandlerInterface;
 
-    public SunmiBarcodeScannerKeyHandler(Bridge bridge) {
-        this.bridge = bridge;
+public class SunmiBarcodeScannerKeyHandler implements KeyHandlerInterface {
+    public interface SunmiBarcodeScannerKeyHandlerCallback {
+        void onBarcodeScanned(String barcode, String device, int id);
+    }
+
+    protected SunmiBarcodeScannerKeyHandlerCallback callback;
+
+    public SunmiBarcodeScannerKeyHandler(SunmiBarcodeScannerKeyHandlerCallback callback) {
+        this.callback = callback;
     }
 
     private static class ScanBuffer {
@@ -73,16 +79,7 @@ public class SunmiBarcodeScannerKeyHandler implements KeyHandlerInterface {
             if(!buffers.containsKey(device_id))
                 return true;
 
-            try {
-                JSONObject json = new JSONObject();
-                json.put("barcode", buffers.get(device_id).getBuffer());
-                json.put("device", device_name);
-                json.put("id", device_id);
-
-                bridge.triggerWindowJSEvent("sunmi_barcode_scan", json.toString(3));
-            } catch (JSONException e) {
-                throw new RuntimeException(e);
-            }
+            callback.onBarcodeScanned(buffers.get(device_id).getBuffer(), device_name, device_id);
 
             buffers.remove(device_id);
 

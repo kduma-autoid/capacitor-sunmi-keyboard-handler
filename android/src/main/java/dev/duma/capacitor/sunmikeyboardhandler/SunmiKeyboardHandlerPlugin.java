@@ -1,14 +1,31 @@
 package dev.duma.capacitor.sunmikeyboardhandler;
 
+import android.util.ArrayMap;
+import android.util.Pair;
+import android.view.KeyEvent;
+
+import androidx.annotation.Nullable;
+
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
 
+import org.json.JSONArray;
+
+import java.util.Map;
+import java.util.Objects;
+
+import dev.duma.capacitor.sunmikeyboardhandler.enums.HandleableKeyEnum;
+import dev.duma.capacitor.sunmikeyboardhandler.enums.KeyEventEnum;
+import dev.duma.capacitor.sunmikeyboardhandler.handlers.SunmiBarcodeScannerKeyHandler;
+import dev.duma.capacitor.sunmikeyboardhandler.handlers.SunmiKeyboardKeyHandler;
+import dev.duma.capacitor.sunmikeyboardhandler.handlers.SunmiL2sShortcutKeyHandler;
+
 @CapacitorPlugin(name = "SunmiKeyboardHandler")
-public class SunmiKeyboardHandlerPlugin extends Plugin {
-    private SunmiKeyboardHandler implementation = new SunmiKeyboardHandler();
+public class SunmiKeyboardHandlerPlugin extends Plugin implements KeyHandlerInterface {
+    protected Map<HandleableKeyEnum, Pair<String, KeyHandlerInterface>> keyHandlers = new ArrayMap<>();
 
     @Override
     public void load() {
@@ -16,17 +33,182 @@ public class SunmiKeyboardHandlerPlugin extends Plugin {
 
         HasKeyHandlersInterface activity = (HasKeyHandlersInterface) getActivity();
 
-        activity.registerKeyHandler(new SunmiKeyboardKeyHandler(getBridge()));
-        activity.registerKeyHandler(new SunmiBarcodeScannerKeyHandler(getBridge()));
-        activity.registerKeyHandler(new SunmiL2sShortcutKeyHandler(getBridge()));
+        activity.setKeyHandler(this);
     }
 
-    @PluginMethod
-    public void echo(PluginCall call) {
-        String value = call.getString("value");
+    @Override
+    public boolean handle(KeyEvent event) {
 
-        JSObject ret = new JSObject();
-        ret.put("value", implementation.echo(value));
-        call.resolve(ret);
+        for (Map.Entry<HandleableKeyEnum, Pair<String, KeyHandlerInterface>> entry : keyHandlers.entrySet()) {
+            if(entry.getValue().second.handle(event))
+                return true;
+        }
+
+        return false;
+    }
+
+    @PluginMethod(returnType = PluginMethod.RETURN_CALLBACK)
+    public void setKeyHandler(PluginCall call) {
+        HandleableKeyEnum key = HandleableKeyEnum.valueOfLabel(call.getString("key"));
+
+        if(key == null) {
+            call.reject("Invalid key");
+            return;
+        }
+
+        if(keyHandlers.containsKey(key)) {
+            call.reject("Key handler is already set");
+            return;
+        }
+
+        switch (key) {
+            case Esc:
+            case F1:
+            case F2:
+            case F3:
+            case F4:
+            case F5:
+            case F6:
+            case F7:
+            case F8:
+            case F9:
+            case F10:
+            case Delete:
+            case Home:
+            case End:
+            case PgUp:
+            case PgDn:
+            case Cash:
+                call.setKeepAlive(true);
+                bridge.saveCall(call);
+
+                String KeyboardCallbackId = call.getCallbackId();
+                SunmiKeyboardKeyHandler sunmiKeyboardKeyHandler = new SunmiKeyboardKeyHandler(key, (modifiers, pressed) -> {
+                    PluginCall c = bridge.getSavedCall(KeyboardCallbackId);
+
+                    if (c == null)
+                        return;
+
+                    JSObject data = new JSObject();
+
+                    data.put("key", key.toString());
+                    JSONArray m = new JSONArray();
+                    for (int i = 0; i < modifiers.size(); i++) {
+                        m.put(modifiers.get(i).toString());
+                    }
+                    data.put("modifiers", m);
+                    data.put("type", pressed ? KeyEventEnum.KeyDown.toString() : KeyEventEnum.KeyUp.toString());
+
+                    c.resolve(data);
+                });
+
+                keyHandlers.put(key, new Pair<>(call.getCallbackId(), sunmiKeyboardKeyHandler));
+                break;
+
+            case L2s_Shortcut_or_RFID:
+                call.setKeepAlive(true);
+                bridge.saveCall(call);
+
+                String L2SCallbackId = call.getCallbackId();
+                SunmiL2sShortcutKeyHandler sunmiL2sShortcutKeyHandler = new SunmiL2sShortcutKeyHandler((pressed) -> {
+                    PluginCall c = bridge.getSavedCall(L2SCallbackId);
+
+                    if (c == null)
+                        return;
+
+                    JSObject data = new JSObject();
+
+                    data.put("key", HandleableKeyEnum.L2s_Shortcut_or_RFID.toString());
+                    JSObject d = new JSObject();
+                    d.put("modifiers", new JSONArray());
+                    d.put("type", pressed ? KeyEventEnum.KeyDown.toString() : KeyEventEnum.KeyUp.toString());
+
+                    c.resolve(data);
+                });
+
+                keyHandlers.put(HandleableKeyEnum.L2s_Shortcut_or_RFID, new Pair<>(call.getCallbackId(), sunmiL2sShortcutKeyHandler));
+                break;
+
+            case Barcode:
+                call.reject("Barcode handler is not settable using this method");
+                break;
+        }
+
+    }
+
+    @PluginMethod()
+    public void removeKeyHandler(PluginCall call) {
+        HandleableKeyEnum key = HandleableKeyEnum.valueOfLabel(call.getString("key"));
+
+        if(key == null) {
+            call.reject("Invalid key");
+            return;
+        }
+
+        if(!keyHandlers.containsKey(key)) {
+            call.reject("Key handler not set");
+            return;
+        }
+
+        String callbackId = Objects.requireNonNull(keyHandlers.get(key)).first;
+
+        bridge.releaseCall(callbackId);
+
+        keyHandlers.remove(key);
+
+        call.resolve();
+    }
+
+    private String BarcodeHandlerCallbackId = null;
+
+    @Nullable
+    protected PluginCall getBarcodeHandlerCall() {
+        if (BarcodeHandlerCallbackId == null)
+            return null;
+
+        return bridge.getSavedCall(BarcodeHandlerCallbackId);
+    }
+
+    @PluginMethod(returnType = PluginMethod.RETURN_CALLBACK)
+    public void setBarcodeHandler(PluginCall call) {
+        if (BarcodeHandlerCallbackId != null) {
+            call.reject("Barcode handler already set");
+            return;
+        }
+
+        BarcodeHandlerCallbackId = call.getCallbackId();
+        call.setKeepAlive(true);
+        bridge.saveCall(call);
+
+        SunmiBarcodeScannerKeyHandler handler = new SunmiBarcodeScannerKeyHandler((barcode, device, id) -> {
+            PluginCall c = getBarcodeHandlerCall();
+
+            if (c == null)
+                return;
+
+            JSObject data = new JSObject();
+
+            data.put("barcode", barcode);
+            JSObject d = new JSObject();
+            d.put("type", device);
+            d.put("id", id);
+            data.put("device", d);
+
+            c.resolve(data);
+        });
+
+        keyHandlers.put(HandleableKeyEnum.Barcode, new Pair<>(BarcodeHandlerCallbackId, handler));
+    }
+
+    @PluginMethod()
+    public void removeBarcodeHandler(PluginCall call) {
+        if (BarcodeHandlerCallbackId != null) {
+            bridge.releaseCall(BarcodeHandlerCallbackId);
+            BarcodeHandlerCallbackId = null;
+        }
+
+        keyHandlers.remove(HandleableKeyEnum.Barcode);
+
+        call.resolve();
     }
 }
