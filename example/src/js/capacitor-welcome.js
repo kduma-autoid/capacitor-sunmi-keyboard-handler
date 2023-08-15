@@ -82,9 +82,19 @@ window.customElements.define(
         output.innerHTML = "<b>barcode_scan_handler:</b><br><pre>" + JSON.stringify(e, null, 3) + "</pre><hr>" + output.innerHTML;
       }
 
-      const shortcut_key_handler = (e) => {
+      const l2s_shortcut_key_handler = (e) => {
         const output = self.shadowRoot.querySelector('#output');
-        output.innerHTML = "<b>shortcut_key_handler:</b><br><pre>" + JSON.stringify(e, null, 3) + "</pre><hr>" + output.innerHTML;
+        output.innerHTML = "<b>l2s_shortcut_key_handler:</b><br><pre>" + JSON.stringify(e, null, 3) + "</pre><hr>" + output.innerHTML;
+      }
+
+      const l2k_shortcut_key_handler = (e) => {
+        const output = self.shadowRoot.querySelector('#output');
+        output.innerHTML = "<b>l2k_shortcut_key_handler:</b><br><pre>" + JSON.stringify(e, null, 3) + "</pre><hr>" + output.innerHTML;
+      }
+
+      const l2k_rfid_key_handler = (e) => {
+        const output = self.shadowRoot.querySelector('#output');
+        output.innerHTML = "<b>l2k_rfid_key_handler:</b><br><pre>" + JSON.stringify(e, null, 3) + "</pre><hr>" + output.innerHTML;
       }
 
       const keyboard_press_handler = (e) => {
@@ -95,7 +105,9 @@ window.customElements.define(
       await Promise.all([
         SunmiKeyboardHandler.setDebugHandler(debug_handler),
         SunmiKeyboardHandler.setBarcodeHandler(barcode_scan_handler),
-        SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.L2s_Shortcut_or_RFID }, shortcut_key_handler),
+        SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.L2s_Shortcut_or_RFID }, l2s_shortcut_key_handler),
+        SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.L2k_Shortcut }, l2k_shortcut_key_handler),
+        SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.L2k_RFID }, l2k_rfid_key_handler),
         SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.Esc }, keyboard_press_handler),
         SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.F1 }, keyboard_press_handler),
         SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.F2 }, keyboard_press_handler),

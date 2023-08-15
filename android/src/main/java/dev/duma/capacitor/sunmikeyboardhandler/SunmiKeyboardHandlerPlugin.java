@@ -22,6 +22,8 @@ import dev.duma.capacitor.sunmikeyboardhandler.enums.KeyEventEnum;
 import dev.duma.capacitor.sunmikeyboardhandler.handlers.DebugKeyHandler;
 import dev.duma.capacitor.sunmikeyboardhandler.handlers.SunmiBarcodeScannerKeyHandler;
 import dev.duma.capacitor.sunmikeyboardhandler.handlers.SunmiKeyboardKeyHandler;
+import dev.duma.capacitor.sunmikeyboardhandler.handlers.SunmiL2kRfidKeyHandler;
+import dev.duma.capacitor.sunmikeyboardhandler.handlers.SunmiL2kShortcutKeyHandler;
 import dev.duma.capacitor.sunmikeyboardhandler.handlers.SunmiL2sShortcutKeyHandler;
 
 @CapacitorPlugin(name = "SunmiKeyboardHandler")
@@ -127,6 +129,52 @@ public class SunmiKeyboardHandlerPlugin extends Plugin implements KeyHandlerInte
                 });
 
                 keyHandlers.put(HandleableKeyEnum.L2s_Shortcut_or_RFID, new Pair<>(call.getCallbackId(), sunmiL2sShortcutKeyHandler));
+                break;
+
+            case L2k_Shortcut:
+                call.setKeepAlive(true);
+                bridge.saveCall(call);
+
+                String L2kShortcutCallbackId = call.getCallbackId();
+                SunmiL2kShortcutKeyHandler sunmiL2kShortcutKeyHandler = new SunmiL2kShortcutKeyHandler((pressed) -> {
+                    PluginCall c = bridge.getSavedCall(L2kShortcutCallbackId);
+
+                    if (c == null)
+                        return;
+
+                    JSObject data = new JSObject();
+
+                    data.put("key", HandleableKeyEnum.L2k_Shortcut.toString());
+                    data.put("modifiers", new JSONArray());
+                    data.put("type", pressed ? KeyEventEnum.KeyDown.toString() : KeyEventEnum.KeyUp.toString());
+
+                    c.resolve(data);
+                });
+
+                keyHandlers.put(HandleableKeyEnum.L2k_Shortcut, new Pair<>(call.getCallbackId(), sunmiL2kShortcutKeyHandler));
+                break;
+
+            case L2k_RFID:
+                call.setKeepAlive(true);
+                bridge.saveCall(call);
+
+                String L2kRfidCallbackId = call.getCallbackId();
+                SunmiL2kRfidKeyHandler sunmiL2kRfidKeyHandler = new SunmiL2kRfidKeyHandler((pressed) -> {
+                    PluginCall c = bridge.getSavedCall(L2kRfidCallbackId);
+
+                    if (c == null)
+                        return;
+
+                    JSObject data = new JSObject();
+
+                    data.put("key", HandleableKeyEnum.L2k_RFID.toString());
+                    data.put("modifiers", new JSONArray());
+                    data.put("type", pressed ? KeyEventEnum.KeyDown.toString() : KeyEventEnum.KeyUp.toString());
+
+                    c.resolve(data);
+                });
+
+                keyHandlers.put(HandleableKeyEnum.L2k_RFID, new Pair<>(call.getCallbackId(), sunmiL2kRfidKeyHandler));
                 break;
 
             case Barcode:
@@ -246,6 +294,11 @@ public class SunmiKeyboardHandlerPlugin extends Plugin implements KeyHandlerInte
             JSObject data = new JSObject();
 
             data.put("event", event.toString());
+            data.put("eventKeyCode", event.getKeyCode());
+            data.put("device", event.getDevice().toString());
+            data.put("deviceVendorId", event.getDevice().getVendorId());
+            data.put("deviceProductId", event.getDevice().getProductId());
+            data.put("deviceName", event.getDevice().getName());
 
             c.resolve(data);
         });

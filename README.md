@@ -198,6 +198,8 @@ Remove a callback set by `setDebugHandler`.
 | **`PgDn`**                 | <code>"PGDN"</code>                 |
 | **`Cash`**                 | <code>"CASH"</code>                 |
 | **`L2s_Shortcut_or_RFID`** | <code>"L2S_SHORTCUT_OR_RFID"</code> |
+| **`L2k_Shortcut`**         | <code>"L2K_SHORTCUT"</code>         |
+| **`L2k_RFID`**             | <code>"L2K_RFID"</code>             |
 
 
 #### ModifierKey

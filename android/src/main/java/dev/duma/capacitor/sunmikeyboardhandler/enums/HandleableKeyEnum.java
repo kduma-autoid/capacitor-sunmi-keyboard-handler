@@ -43,6 +43,8 @@ public enum HandleableKeyEnum implements Labeled {
     Cash("CASH"),
 
     L2s_Shortcut_or_RFID("L2S_SHORTCUT_OR_RFID"),
+    L2k_Shortcut("L2K_SHORTCUT"),
+    L2k_RFID("L2K_RFID"),
 
     Barcode("BARCODE"),
 
