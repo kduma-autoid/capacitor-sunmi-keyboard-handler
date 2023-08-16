@@ -1,8 +1,10 @@
 package dev.duma.capacitor.sunmikeyboardhandler;
 
 import android.util.ArrayMap;
+import android.util.Log;
 import android.util.Pair;
 import android.view.KeyEvent;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 
@@ -27,27 +29,25 @@ import dev.duma.capacitor.sunmikeyboardhandler.handlers.SunmiL2kShortcutKeyHandl
 import dev.duma.capacitor.sunmikeyboardhandler.handlers.SunmiL2sShortcutKeyHandler;
 
 @CapacitorPlugin(name = "SunmiKeyboardHandler")
-public class SunmiKeyboardHandlerPlugin extends Plugin implements KeyHandlerInterface {
+public class SunmiKeyboardHandlerPlugin extends Plugin {
     protected Map<HandleableKeyEnum, Pair<String, KeyHandlerInterface>> keyHandlers = new ArrayMap<>();
 
     @Override
     public void load() {
         super.load();
 
-        HasKeyHandlersInterface activity = (HasKeyHandlersInterface) getActivity();
+        getBridge().getWebView().setOnKeyListener(
+                (view, keyCode, keyEvent) -> {
+                    Log.w("Code Pressed", "code" + keyCode);
 
-        activity.setKeyHandler(this);
-    }
+                    for (Map.Entry<HandleableKeyEnum, Pair<String, KeyHandlerInterface>> entry : keyHandlers.entrySet()) {
+                        if(entry.getValue().second.handle(keyEvent))
+                            return true;
+                    }
 
-    @Override
-    public boolean handle(KeyEvent event) {
-
-        for (Map.Entry<HandleableKeyEnum, Pair<String, KeyHandlerInterface>> entry : keyHandlers.entrySet()) {
-            if(entry.getValue().second.handle(event))
-                return true;
-        }
-
-        return false;
+                    return false;
+                }
+        );
     }
 
     @PluginMethod(returnType = PluginMethod.RETURN_CALLBACK)
