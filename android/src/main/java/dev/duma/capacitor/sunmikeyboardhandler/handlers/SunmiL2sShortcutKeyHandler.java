@@ -30,7 +30,7 @@ public class SunmiL2sShortcutKeyHandler implements KeyHandlerInterface {
         if ((device.getVendorId() != 9300 || device.getProductId() != 25856) && !device.getName().contains("mtk-kpd")) // Sunmi built-in buttons
             return false;
 
-        if (event.getKeyCode() != 288 && event.getKeyCode() != KEYCODE_F11) // Sunmi L2s Shortcut / Scan UHF button
+        if (event.getKeyCode() != KEYCODE_F11) // Sunmi L2s Shortcut
             return false;
 
         if (event.getAction() == ACTION_DOWN && !isButtonPressed) {

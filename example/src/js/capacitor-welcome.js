@@ -92,9 +92,9 @@ window.customElements.define(
         output.innerHTML = "<b>l2k_shortcut_key_handler:</b><br><pre>" + JSON.stringify(e, null, 3) + "</pre><hr>" + output.innerHTML;
       }
 
-      const l2k_rfid_key_handler = (e) => {
+      const rfid_key_handler = (e) => {
         const output = self.shadowRoot.querySelector('#output');
-        output.innerHTML = "<b>l2k_rfid_key_handler:</b><br><pre>" + JSON.stringify(e, null, 3) + "</pre><hr>" + output.innerHTML;
+        output.innerHTML = "<b>rfid_key_handler:</b><br><pre>" + JSON.stringify(e, null, 3) + "</pre><hr>" + output.innerHTML;
       }
 
       const keyboard_press_handler = (e) => {
@@ -103,11 +103,10 @@ window.customElements.define(
       }
 
       await Promise.all([
-        SunmiKeyboardHandler.setDebugHandler(debug_handler),
         SunmiKeyboardHandler.setBarcodeHandler(barcode_scan_handler),
-        SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.L2s_Shortcut_or_RFID }, l2s_shortcut_key_handler),
+        SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.L2s_Shortcut }, l2s_shortcut_key_handler),
         SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.L2k_Shortcut }, l2k_shortcut_key_handler),
-        SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.L2k_RFID }, l2k_rfid_key_handler),
+        SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.RFID }, rfid_key_handler),
         SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.Esc }, keyboard_press_handler),
         SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.F1 }, keyboard_press_handler),
         SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.F2 }, keyboard_press_handler),
@@ -125,6 +124,7 @@ window.customElements.define(
         SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.PgUp }, keyboard_press_handler),
         SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.PgDn }, keyboard_press_handler),
         SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.Cash }, keyboard_press_handler),
+        SunmiKeyboardHandler.setDebugHandler(debug_handler),
       ]);
     }
   }

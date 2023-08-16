@@ -42,9 +42,9 @@ public enum HandleableKeyEnum implements Labeled {
     PgDn("PGDN"),
     Cash("CASH"),
 
-    L2s_Shortcut_or_RFID("L2S_SHORTCUT_OR_RFID"),
+    L2s_Shortcut("L2S_SHORTCUT"),
     L2k_Shortcut("L2K_SHORTCUT"),
-    L2k_RFID("L2K_RFID"),
+    RFID("RFID"),
 
     Barcode("BARCODE"),
 

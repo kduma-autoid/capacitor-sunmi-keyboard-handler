@@ -178,28 +178,28 @@ Remove a callback set by `setDebugHandler`.
 
 #### HandleableKey
 
-| Members                    | Value                               |
-| -------------------------- | ----------------------------------- |
-| **`Esc`**                  | <code>"ESC"</code>                  |
-| **`F1`**                   | <code>"F1"</code>                   |
-| **`F2`**                   | <code>"F2"</code>                   |
-| **`F3`**                   | <code>"F3"</code>                   |
-| **`F4`**                   | <code>"F4"</code>                   |
-| **`F5`**                   | <code>"F5"</code>                   |
-| **`F6`**                   | <code>"F6"</code>                   |
-| **`F7`**                   | <code>"F7"</code>                   |
-| **`F8`**                   | <code>"F8"</code>                   |
-| **`F9`**                   | <code>"F9"</code>                   |
-| **`F10`**                  | <code>"F10"</code>                  |
-| **`Delete`**               | <code>"DELETE"</code>               |
-| **`Home`**                 | <code>"HOME"</code>                 |
-| **`End`**                  | <code>"END"</code>                  |
-| **`PgUp`**                 | <code>"PGUP"</code>                 |
-| **`PgDn`**                 | <code>"PGDN"</code>                 |
-| **`Cash`**                 | <code>"CASH"</code>                 |
-| **`L2s_Shortcut_or_RFID`** | <code>"L2S_SHORTCUT_OR_RFID"</code> |
-| **`L2k_Shortcut`**         | <code>"L2K_SHORTCUT"</code>         |
-| **`L2k_RFID`**             | <code>"L2K_RFID"</code>             |
+| Members            | Value                       |
+| ------------------ | --------------------------- |
+| **`Esc`**          | <code>"ESC"</code>          |
+| **`F1`**           | <code>"F1"</code>           |
+| **`F2`**           | <code>"F2"</code>           |
+| **`F3`**           | <code>"F3"</code>           |
+| **`F4`**           | <code>"F4"</code>           |
+| **`F5`**           | <code>"F5"</code>           |
+| **`F6`**           | <code>"F6"</code>           |
+| **`F7`**           | <code>"F7"</code>           |
+| **`F8`**           | <code>"F8"</code>           |
+| **`F9`**           | <code>"F9"</code>           |
+| **`F10`**          | <code>"F10"</code>          |
+| **`Delete`**       | <code>"DELETE"</code>       |
+| **`Home`**         | <code>"HOME"</code>         |
+| **`End`**          | <code>"END"</code>          |
+| **`PgUp`**         | <code>"PGUP"</code>         |
+| **`PgDn`**         | <code>"PGDN"</code>         |
+| **`Cash`**         | <code>"CASH"</code>         |
+| **`L2s_Shortcut`** | <code>"L2S_SHORTCUT"</code> |
+| **`L2k_Shortcut`** | <code>"L2K_SHORTCUT"</code> |
+| **`RFID`**         | <code>"RFID"</code>         |
 
 
 #### ModifierKey

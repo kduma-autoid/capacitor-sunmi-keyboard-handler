@@ -8,14 +8,14 @@ import android.view.KeyEvent;
 
 import dev.duma.capacitor.sunmikeyboardhandler.KeyHandlerInterface;
 
-public class SunmiL2kRfidKeyHandler implements KeyHandlerInterface {
-    public interface SunmiL2kRfidKeyHandlerCallback {
+public class SunmiRfidKeyHandler implements KeyHandlerInterface {
+    public interface SunmiRfidKeyHandlerCallback {
         void onKeyPressed(boolean pressed);
     }
 
-    protected SunmiL2kRfidKeyHandlerCallback callback;
+    protected SunmiRfidKeyHandlerCallback callback;
 
-    public SunmiL2kRfidKeyHandler(SunmiL2kRfidKeyHandlerCallback callback) {
+    public SunmiRfidKeyHandler(SunmiRfidKeyHandlerCallback callback) {
         this.callback = callback;
     }
 
@@ -26,10 +26,13 @@ public class SunmiL2kRfidKeyHandler implements KeyHandlerInterface {
 
         InputDevice device = event.getDevice();
 
-        if ((device.getVendorId() != 1 || device.getProductId() != 1) && !device.getName().contains("pogo-keys"))
+        boolean l2kGun = device.getVendorId() == 1 && device.getProductId() == 1 && device.getName().contains("pogo-keys");
+        boolean l2sInternal = device.getVendorId() == 9300 && device.getProductId() == 25856 && device.getName().contains("mtk-kpd");
+
+        if (!l2kGun && !l2sInternal)
             return false;
 
-        if (event.getKeyCode() != 288) // Sunmi L2k RFID Key
+        if (event.getKeyCode() != 288) // Sunmi RFID Key
             return false;
 
         if (event.getAction() == ACTION_DOWN && !isButtonPressed) {
