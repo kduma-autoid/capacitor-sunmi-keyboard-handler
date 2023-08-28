@@ -53,7 +53,10 @@ public class SunmiKeyboardKeyHandler implements KeyHandlerInterface {
     public boolean handle(KeyEvent event) {
         InputDevice device = event.getDevice();
 
-        if((device.getVendorId() != 7847 || device.getProductId() != 2322) && !device.getName().contains("PayKeyboard")) // USB-HID PayKeyboard; VID: 7847; PID: 2322
+        if (
+                ((device.getVendorId() != 7847 || device.getProductId() != 2322) && !device.getName().contains("PayKeyboard")) // USB-HID PayKeyboard; VID: 7847; PID: 2322
+                && (device.getVendorId() != 0 || device.getProductId() != 0 || !device.getName().contains("aw9523-key")) // Sunmi L2Ks
+        )
             return false;
 
         if(event.getKeyCode() != watchedKey.getKeyCode())

@@ -64,7 +64,13 @@ public class SunmiBarcodeScannerKeyHandler implements KeyHandlerInterface {
         if((device.getVendorId() == 7851 && device.getProductId() == 6659) || device.getName().contains("NS021")) {
             // Newland Auto-ID NS021 USB HID Keyboard; VID: 7851; PID: 6659
             device_name = "sunmi_scanner";
-        } else if((device.getVendorId() == 0 && device.getProductId() == 0 && !device.getName().contains("soc:matrix-keypad")) || device.getName().contains("Virtual")) {
+        } else if(((device.getVendorId() == 0 && device.getProductId() == 0) || device.getName().contains("Virtual"))) {
+            if(device.getName().contains("soc:matrix-keypad")) // Sunmi L2k built-in keyboard
+                return false;
+
+            if(device.getName().contains("mtk-kpd") || device.getName().contains("mtk-pmic-keys") || device.getName().contains("aw9523-key") || device.getName().contains("Virtual") && event.getSource() == 0x101) // Sunmi L2ks built-in keyboard
+                return false;
+
             // Built In Scanner
             device_name = "sunmi_builtin";
         } else {

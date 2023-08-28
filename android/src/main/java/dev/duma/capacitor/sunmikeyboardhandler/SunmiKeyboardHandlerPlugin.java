@@ -294,6 +294,7 @@ public class SunmiKeyboardHandlerPlugin extends Plugin implements KeyHandlerInte
             JSObject data = new JSObject();
 
             data.put("event", event.toString());
+            data.put("source", event.getSource());
             data.put("eventKeyCode", event.getKeyCode());
             data.put("device", event.getDevice().toString());
             data.put("deviceVendorId", event.getDevice().getVendorId());
