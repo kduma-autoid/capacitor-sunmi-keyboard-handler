@@ -60,10 +60,12 @@ public class SunmiBarcodeScannerKeyHandler implements KeyHandlerInterface {
 
         String device_name;
 
-        // TODO: Add sunmi_blink
         if((device.getVendorId() == 7851 && device.getProductId() == 6659) || device.getName().contains("NS021")) {
             // Newland Auto-ID NS021 USB HID Keyboard; VID: 7851; PID: 6659
             device_name = "sunmi_scanner";
+        } else if((device.getVendorId() == 8401 && device.getProductId() == 28682) || device.getName().contains("SM-2D")) {
+            // Newland Auto-ID NS021 USB HID Keyboard; VID: 8401; PID: 28682
+            device_name = "sunmi_blink";
         } else if(((device.getVendorId() == 0 && device.getProductId() == 0) || device.getName().contains("Virtual"))) {
             if(device.getName().contains("soc:matrix-keypad")) // Sunmi L2k built-in keyboard
                 return false;
