@@ -5,7 +5,7 @@ on:
     tags: [ 'v*.*.*' ]
 
 env:
-  PACKAGE_NAME: dev.duma.capacitor.sunmiscanhead.example
+  PACKAGE_NAME: dev.duma.capacitor.sunmikeyboardhandler.example
 
 jobs:
   build-example:
