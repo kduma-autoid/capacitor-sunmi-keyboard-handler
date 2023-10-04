@@ -1,6 +1,9 @@
 import { WebPlugin } from '@capacitor/core';
 
-import type { CallbackID, SunmiKeyboardHandlerPlugin } from './definitions';
+import type {
+  CallbackID,
+  SunmiKeyboardHandlerPlugin
+} from './definitions';
 
 export class SunmiKeyboardHandlerWeb
   extends WebPlugin
@@ -29,4 +32,5 @@ export class SunmiKeyboardHandlerWeb
   setKeyHandler(): Promise<CallbackID> {
     throw this.unimplemented('Not implemented on web.');
   }
+
 }

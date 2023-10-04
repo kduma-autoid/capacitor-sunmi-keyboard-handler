@@ -1,6 +1,6 @@
 {
   "name": "@kduma-autoid/capacitor-sunmi-keyboard-handler",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Handler for processing input from Sunmi hardware barcode scanners (builtin and external) and external Sunmi programmable keyboard.",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
@@ -26,11 +26,11 @@
     "native"
   ],
   "scripts": {
-    "verify": "npm run verify:ios && npm run verify:android && npm run verify:web",
+    "verify": "npm run verify:android && npm run verify:web",
     "verify:android": "cd android && ./gradlew clean build test && cd ..",
     "verify:web": "npm run build",
-    "lint": "npm run eslint && npm run prettier -- --check && npm run swiftlint -- lint",
-    "fmt": "npm run eslint -- --fix && npm run prettier -- --write && npm run swiftlint -- --fix --format",
+    "lint": "npm run eslint && npm run prettier -- --check",
+    "fmt": "npm run eslint -- --fix && npm run prettier -- --write",
     "eslint": "eslint . --ext ts",
     "prettier": "prettier \"**/*.{css,html,ts,js,java}\"",
     "docgen": "docgen --api SunmiKeyboardHandlerPlugin --output-readme README.md --output-json dist/docs.json",

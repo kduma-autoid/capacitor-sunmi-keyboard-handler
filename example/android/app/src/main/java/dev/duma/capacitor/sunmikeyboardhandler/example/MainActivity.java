@@ -1,4 +1,4 @@
-package com.example.plugin;
+package dev.duma.capacitor.sunmikeyboardhandler.example;
 
 import android.view.KeyEvent;
 

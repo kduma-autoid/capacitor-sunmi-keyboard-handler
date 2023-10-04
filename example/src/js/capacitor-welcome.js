@@ -1,6 +1,6 @@
 import { SplashScreen } from '@capacitor/splash-screen';
 import { SunmiKeyboardHandler } from '@kduma-autoid/capacitor-sunmi-keyboard-handler';
-import { HandleableKey } from '../../../src';
+import {HandleableKey} from "../../../src";
 
 window.customElements.define(
   'capacitor-welcome',
@@ -70,62 +70,61 @@ window.customElements.define(
     }
 
     async connectedCallback() {
-      const self = this;
+        const self = this;
 
-      const debug_handler = (e) => {
-        const output = self.shadowRoot.querySelector('#output');
-        output.innerHTML = "<b>debug_handler:</b><br><pre>" + JSON.stringify(e, null, 3) + "</pre><hr>" + output.innerHTML;
-      }
+        function printToOutput(key, content) {
+            const output = self.shadowRoot.querySelector('#output');
+            output.innerHTML = "<b>" + key + ":</b><br><pre>" + content + "</pre><hr>" + output.innerHTML;
+        }
 
-      const barcode_scan_handler = (e) => {
-        const output = self.shadowRoot.querySelector('#output');
-        output.innerHTML = "<b>barcode_scan_handler:</b><br><pre>" + JSON.stringify(e, null, 3) + "</pre><hr>" + output.innerHTML;
-      }
+        const debug_handler = (e) => {
+            printToOutput('debug_handler', JSON.stringify(e, null, 3));
+        }
 
-      const l2s_shortcut_key_handler = (e) => {
-        const output = self.shadowRoot.querySelector('#output');
-        output.innerHTML = "<b>l2s_shortcut_key_handler:</b><br><pre>" + JSON.stringify(e, null, 3) + "</pre><hr>" + output.innerHTML;
-      }
+        const barcode_scan_handler = (e) => {
+            printToOutput('barcode_scan_handler', JSON.stringify(e, null, 3));
+        }
 
-      const l2k_shortcut_key_handler = (e) => {
-        const output = self.shadowRoot.querySelector('#output');
-        output.innerHTML = "<b>l2k_shortcut_key_handler:</b><br><pre>" + JSON.stringify(e, null, 3) + "</pre><hr>" + output.innerHTML;
-      }
+        const l2s_shortcut_key_handler = (e) => {
+            printToOutput('l2s_shortcut_key_handler', JSON.stringify(e, null, 3));
+        }
 
-      const rfid_key_handler = (e) => {
-        const output = self.shadowRoot.querySelector('#output');
-        output.innerHTML = "<b>rfid_key_handler:</b><br><pre>" + JSON.stringify(e, null, 3) + "</pre><hr>" + output.innerHTML;
-      }
+        const l2k_shortcut_key_handler = (e) => {
+            printToOutput('l2k_shortcut_key_handler', JSON.stringify(e, null, 3));
+        }
 
-      const keyboard_press_handler = (e) => {
-        const output = self.shadowRoot.querySelector('#output');
-        output.innerHTML = "<b>keyboard_press_handler:</b><br><pre>" + JSON.stringify(e, null, 3) + "</pre><hr>" + output.innerHTML;
-      }
+        const rfid_key_handler = (e) => {
+            printToOutput('rfid_key_handler', JSON.stringify(e, null, 3));
+        }
 
-      await Promise.all([
-        SunmiKeyboardHandler.setBarcodeHandler(barcode_scan_handler),
-        SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.L2s_Shortcut }, l2s_shortcut_key_handler),
-        SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.L2k_Shortcut }, l2k_shortcut_key_handler),
-        SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.RFID }, rfid_key_handler),
-        SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.Esc }, keyboard_press_handler),
-        SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.F1 }, keyboard_press_handler),
-        SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.F2 }, keyboard_press_handler),
-        SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.F3 }, keyboard_press_handler),
-        SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.F4 }, keyboard_press_handler),
-        SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.F5 }, keyboard_press_handler),
-        SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.F6 }, keyboard_press_handler),
-        SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.F7 }, keyboard_press_handler),
-        SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.F8 }, keyboard_press_handler),
-        SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.F9 }, keyboard_press_handler),
-        SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.F10 }, keyboard_press_handler),
-        SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.Delete }, keyboard_press_handler),
-        SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.Home }, keyboard_press_handler),
-        SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.End }, keyboard_press_handler),
-        SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.PgUp }, keyboard_press_handler),
-        SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.PgDn }, keyboard_press_handler),
-        SunmiKeyboardHandler.setKeyHandler({ key: HandleableKey.Cash }, keyboard_press_handler),
-        SunmiKeyboardHandler.setDebugHandler(debug_handler),
-      ]);
+        const keyboard_press_handler = (e) => {
+            printToOutput('keyboard_press_handler', JSON.stringify(e, null, 3));
+        }
+
+        await Promise.all([
+            SunmiKeyboardHandler.setBarcodeHandler(barcode_scan_handler),
+            SunmiKeyboardHandler.setKeyHandler({key: HandleableKey.L2s_Shortcut}, l2s_shortcut_key_handler),
+            SunmiKeyboardHandler.setKeyHandler({key: HandleableKey.L2k_Shortcut}, l2k_shortcut_key_handler),
+            SunmiKeyboardHandler.setKeyHandler({key: HandleableKey.RFID}, rfid_key_handler),
+            SunmiKeyboardHandler.setKeyHandler({key: HandleableKey.Esc}, keyboard_press_handler),
+            SunmiKeyboardHandler.setKeyHandler({key: HandleableKey.F1}, keyboard_press_handler),
+            SunmiKeyboardHandler.setKeyHandler({key: HandleableKey.F2}, keyboard_press_handler),
+            SunmiKeyboardHandler.setKeyHandler({key: HandleableKey.F3}, keyboard_press_handler),
+            SunmiKeyboardHandler.setKeyHandler({key: HandleableKey.F4}, keyboard_press_handler),
+            SunmiKeyboardHandler.setKeyHandler({key: HandleableKey.F5}, keyboard_press_handler),
+            SunmiKeyboardHandler.setKeyHandler({key: HandleableKey.F6}, keyboard_press_handler),
+            SunmiKeyboardHandler.setKeyHandler({key: HandleableKey.F7}, keyboard_press_handler),
+            SunmiKeyboardHandler.setKeyHandler({key: HandleableKey.F8}, keyboard_press_handler),
+            SunmiKeyboardHandler.setKeyHandler({key: HandleableKey.F9}, keyboard_press_handler),
+            SunmiKeyboardHandler.setKeyHandler({key: HandleableKey.F10}, keyboard_press_handler),
+            SunmiKeyboardHandler.setKeyHandler({key: HandleableKey.Delete}, keyboard_press_handler),
+            SunmiKeyboardHandler.setKeyHandler({key: HandleableKey.Home}, keyboard_press_handler),
+            SunmiKeyboardHandler.setKeyHandler({key: HandleableKey.End}, keyboard_press_handler),
+            SunmiKeyboardHandler.setKeyHandler({key: HandleableKey.PgUp}, keyboard_press_handler),
+            SunmiKeyboardHandler.setKeyHandler({key: HandleableKey.PgDn}, keyboard_press_handler),
+            SunmiKeyboardHandler.setKeyHandler({key: HandleableKey.Cash}, keyboard_press_handler),
+            SunmiKeyboardHandler.setDebugHandler(debug_handler),
+        ]);
     }
   }
 );

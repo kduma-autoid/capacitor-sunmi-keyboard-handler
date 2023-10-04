@@ -6,6 +6,7 @@ const SunmiKeyboardHandler = registerPlugin<SunmiKeyboardHandlerPlugin>(
   'SunmiKeyboardHandler',
   {
     web: () => import('./web').then(m => new m.SunmiKeyboardHandlerWeb()),
+    ios: () => import('./web').then(m => new m.SunmiKeyboardHandlerWeb()),
   },
 );
 
