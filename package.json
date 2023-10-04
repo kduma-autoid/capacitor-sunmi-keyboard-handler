@@ -1,6 +1,6 @@
 {
   "name": "@kduma-autoid/capacitor-sunmi-keyboard-handler",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Handler for processing input from Sunmi hardware barcode scanners (builtin and external) and external Sunmi programmable keyboard.",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
