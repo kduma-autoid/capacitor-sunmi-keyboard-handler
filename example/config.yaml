@@ -1,8 +1,8 @@
 vars:
   BUILD_NUMBER:
-    default: 4
+    default: 5
   VERSION_NAME:
-    default: 0.2.2
+    default: 0.2.3
   APP_NAME:
     default: Sunmi Keyboard Handler plugin for Capacitor.js
   SHORT_APP_NAME:
