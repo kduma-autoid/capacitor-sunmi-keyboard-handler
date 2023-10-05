@@ -1,6 +1,7 @@
 import { SplashScreen } from '@capacitor/splash-screen';
 import { SunmiKeyboardHandler } from '@kduma-autoid/capacitor-sunmi-keyboard-handler';
 import {HandleableKey} from "../../../src";
+import {WebViewWatchDog} from "@kduma-autoid/capacitor-webview-watchdog";
 
 window.customElements.define(
   'capacitor-welcome',
@@ -9,6 +10,7 @@ window.customElements.define(
       super();
 
       SplashScreen.hide();
+      WebViewWatchDog.ping();
 
       const root = this.attachShadow({ mode: 'open' });
 
