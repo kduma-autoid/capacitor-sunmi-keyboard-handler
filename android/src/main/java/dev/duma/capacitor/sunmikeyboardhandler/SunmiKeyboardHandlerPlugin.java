@@ -20,7 +20,7 @@ import dev.duma.capacitor.sunmikeyboardhandler.enums.KeyEventEnum;
 import dev.duma.capacitor.sunmikeyboardhandler.enums.ModifierKeyEnum;
 import dev.duma.capacitor.sunmikeyboardhandler.handlers.DebugKeyHandler;
 import dev.duma.capacitor.sunmikeyboardhandler.handlers.IHandler;
-import dev.duma.capacitor.sunmikeyboardhandler.handlers.Sunmi89KeyKeyboardHandler;
+import dev.duma.capacitor.sunmikeyboardhandler.handlers.Sunmi89KeyKeyPadHandler;
 import dev.duma.capacitor.sunmikeyboardhandler.handlers.Sunmi89KeyKeyboardKeyHandler;
 import dev.duma.capacitor.sunmikeyboardhandler.handlers.Sunmi89KeyNumPadHandler;
 import dev.duma.capacitor.sunmikeyboardhandler.handlers.SunmiBarcodeScannerKeyHandler;
@@ -115,7 +115,7 @@ public class SunmiKeyboardHandlerPlugin extends Plugin implements KeyHandlerInte
 
             new SunmiBarcodeScannerKeyHandler(callback),
 
-            new Sunmi89KeyKeyboardHandler(callback),
+            new Sunmi89KeyKeyPadHandler(callback),
             new Sunmi89KeyNumPadHandler(callback),
 
             new DebugKeyHandler(callback)

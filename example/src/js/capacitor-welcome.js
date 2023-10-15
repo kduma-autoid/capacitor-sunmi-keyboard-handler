@@ -96,6 +96,11 @@ window.customElements.define(
         });
 
         await Promise.all([
+            SunmiKeyboardHandler.enableHandler({key: HandleableKey.Sunmi89KeyKeyboard_Left}),
+            SunmiKeyboardHandler.enableHandler({key: HandleableKey.Sunmi89KeyKeyboard_Down}),
+            SunmiKeyboardHandler.enableHandler({key: HandleableKey.Sunmi89KeyKeyboard_Right}),
+            SunmiKeyboardHandler.enableHandler({key: HandleableKey.Sunmi89KeyKeyboard_Up}),
+
             SunmiKeyboardHandler.enableHandler({key: HandleableKey.Sunmi89KeyKeyboard_KeyPad}),
             SunmiKeyboardHandler.enableHandler({key: HandleableKey.Sunmi89KeyKeyboard_NumPad}),
 

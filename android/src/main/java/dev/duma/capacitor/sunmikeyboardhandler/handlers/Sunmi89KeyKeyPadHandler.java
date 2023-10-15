@@ -13,8 +13,8 @@ import java.util.Set;
 
 import dev.duma.capacitor.sunmikeyboardhandler.enums.HandleableKeyEnum;
 
-public class Sunmi89KeyKeyboardHandler extends AbstractKeyboardHandler {
-    public Sunmi89KeyKeyboardHandler(Callback callback) {
+public class Sunmi89KeyKeyPadHandler extends AbstractKeyboardHandler {
+    public Sunmi89KeyKeyPadHandler(Callback callback) {
         super(callback);
     }
 
