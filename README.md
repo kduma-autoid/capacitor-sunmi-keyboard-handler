@@ -255,11 +255,12 @@ addListener(eventName: 'onDebug', listenerFunc: OnDebugCallback) => Promise<Plug
 
 #### ModifierKey
 
-| Members     | Value                |
-| ----------- | -------------------- |
-| **`Alt`**   | <code>"ALT"</code>   |
-| **`Ctrl`**  | <code>"CTRL"</code>  |
-| **`Shift`** | <code>"SHIFT"</code> |
+| Members        | Value                   |
+| -------------- | ----------------------- |
+| **`Alt`**      | <code>"ALT"</code>      |
+| **`Ctrl`**     | <code>"CTRL"</code>     |
+| **`Shift`**    | <code>"SHIFT"</code>    |
+| **`CapsLock`** | <code>"CAPSLOCK"</code> |
 
 
 #### KeyEvent

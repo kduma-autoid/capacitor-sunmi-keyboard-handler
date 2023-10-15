@@ -62,6 +62,9 @@ public class Sunmi89KeyKeyboardKeyHandler extends AbstractMultipleKeysHandler {
         if(event.isAltPressed())
             modifiers.add(ModifierKeyEnum.Alt);
 
+        if(event.isCapsLockOn())
+            modifiers.add(ModifierKeyEnum.CapsLock);
+
         return modifiers;
     }
 }

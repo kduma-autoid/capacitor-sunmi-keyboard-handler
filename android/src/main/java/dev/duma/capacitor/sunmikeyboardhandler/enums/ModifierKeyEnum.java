@@ -8,7 +8,8 @@ import java.util.Map;
 public enum ModifierKeyEnum implements Labeled {
     Alt("ALT"),
     Ctrl("CTRL"),
-    Shift("SHIFT");
+    Shift("SHIFT"),
+    CapsLock("CAPSLOCK");
 
     private static final Map<String, ModifierKeyEnum> BY_LABEL = new HashMap<>();
 

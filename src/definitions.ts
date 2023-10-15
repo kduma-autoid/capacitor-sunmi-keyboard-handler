@@ -89,6 +89,7 @@ export enum ModifierKey {
   Alt = "ALT",
   Ctrl = "CTRL",
   Shift = "SHIFT",
+  CapsLock = "CAPSLOCK",
 }
 
 export enum KeyEvent {
