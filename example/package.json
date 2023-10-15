@@ -1,6 +1,6 @@
 {
   "name": "capacitor-app",
-  "version": "0.2.3",
+  "version": "1.0.0",
   "description": "Sunmi Keyboard Handler plugin for Capacitor.js",
   "main": "index.js",
   "keywords": [

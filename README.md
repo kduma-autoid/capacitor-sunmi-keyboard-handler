@@ -270,8 +270,8 @@ addListener(eventName: 'onKeyboardInput', listenerFunc: OnKeyboardInputCallback)
 | **`L2K_RIGHT`**                         | <code>"L2K_RIGHT"</code>         |
 | **`L2K_CENTER`**                        | <code>"L2K_CENTER"</code>        |
 | **`L2s_Shortcut`**                      | <code>"L2S_SHORTCUT"</code>      |
-| **`L2k_Shortcut`**                      | <code>"L2K_SHORTCUT"</code>      |
-| **`Sunmi_RFID`**                        | <code>"RFID"</code>              |
+| **`L2K_Shortcut`**                      | <code>"L2K_SHORTCUT"</code>      |
+| **`RFID`**                              | <code>"RFID"</code>              |
 | **`Barcode_Any`**                       | <code>"BARCODE"</code>           |
 | **`Barcode_BuiltIn`**                   | <code>"BARCODE_BUILTIN"</code>   |
 | **`Barcode_Handheld`**                  | <code>"BARCODE_HANDHELD"</code>  |
