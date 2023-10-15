@@ -20,7 +20,7 @@ public class Sunmi89KeyKeyboardKeyHandler extends AbstractMultipleKeysHandler {
 
     @Override
     protected boolean isCompatibleDevice(InputDevice device, KeyEvent event) {
-        return DeviceIdentificationHelper.isSunmi89KeyKeyboard(device) || DeviceIdentificationHelper.isSunmiL2KsFunctionKeysKeyboard(device);
+        return DeviceIdentificationHelper.isSunmi89KeyKeyboard(device);
     }
 
     @Override

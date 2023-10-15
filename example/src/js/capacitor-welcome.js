@@ -93,10 +93,14 @@ window.customElements.define(
 
         await Promise.all([
             SunmiKeyboardHandler.enableHandler({key: HandleableKey.Barcode_Any}),
+
             SunmiKeyboardHandler.enableHandler({key: HandleableKey.Debug}),
+
             SunmiKeyboardHandler.enableHandler({key: HandleableKey.L2s_Shortcut}),
             SunmiKeyboardHandler.enableHandler({key: HandleableKey.L2k_Shortcut}),
+
             SunmiKeyboardHandler.enableHandler({key: HandleableKey.Sunmi_RFID}),
+
             SunmiKeyboardHandler.enableHandler({key: HandleableKey.Sunmi89KeyKeyboard_Esc}),
             SunmiKeyboardHandler.enableHandler({key: HandleableKey.Sunmi89KeyKeyboard_F1}),
             SunmiKeyboardHandler.enableHandler({key: HandleableKey.Sunmi89KeyKeyboard_F2}),
@@ -114,6 +118,37 @@ window.customElements.define(
             SunmiKeyboardHandler.enableHandler({key: HandleableKey.Sunmi89KeyKeyboard_PgUp}),
             SunmiKeyboardHandler.enableHandler({key: HandleableKey.Sunmi89KeyKeyboard_PgDn}),
             SunmiKeyboardHandler.enableHandler({key: HandleableKey.Sunmi89KeyKeyboard_Cash}),
+
+            SunmiKeyboardHandler.enableHandler({key: HandleableKey.L2Ks_F1}),
+            SunmiKeyboardHandler.enableHandler({key: HandleableKey.L2Ks_F2}),
+            SunmiKeyboardHandler.enableHandler({key: HandleableKey.L2Ks_F3}),
+            SunmiKeyboardHandler.enableHandler({key: HandleableKey.L2Ks_F4}),
+            SunmiKeyboardHandler.enableHandler({key: HandleableKey.L2Ks_F5}),
+            SunmiKeyboardHandler.enableHandler({key: HandleableKey.L2Ks_F6}),
+            SunmiKeyboardHandler.enableHandler({key: HandleableKey.L2Ks_F7}),
+            SunmiKeyboardHandler.enableHandler({key: HandleableKey.L2Ks_F8}),
+            SunmiKeyboardHandler.enableHandler({key: HandleableKey.L2Ks_F9}),
+            SunmiKeyboardHandler.enableHandler({key: HandleableKey.L2Ks_BACK}),
+            SunmiKeyboardHandler.enableHandler({key: HandleableKey.L2Ks_ENTER}),
+            SunmiKeyboardHandler.enableHandler({key: HandleableKey.L2Ks_STAR}),
+            SunmiKeyboardHandler.enableHandler({key: HandleableKey.L2Ks_SPACE}),
+            SunmiKeyboardHandler.enableHandler({key: HandleableKey.L2Ks_POUND}),
+            SunmiKeyboardHandler.enableHandler({key: HandleableKey.L2Ks_DEL}),
+            SunmiKeyboardHandler.enableHandler({key: HandleableKey.L2Ks_UP}),
+            SunmiKeyboardHandler.enableHandler({key: HandleableKey.L2Ks_DOWN}),
+            SunmiKeyboardHandler.enableHandler({key: HandleableKey.L2Ks_LEFT}),
+            SunmiKeyboardHandler.enableHandler({key: HandleableKey.L2Ks_RIGHT}),
+            SunmiKeyboardHandler.enableHandler({key: HandleableKey.L2Ks_1}),
+            SunmiKeyboardHandler.enableHandler({key: HandleableKey.L2Ks_2}),
+            SunmiKeyboardHandler.enableHandler({key: HandleableKey.L2Ks_3}),
+            SunmiKeyboardHandler.enableHandler({key: HandleableKey.L2Ks_4}),
+            SunmiKeyboardHandler.enableHandler({key: HandleableKey.L2Ks_5}),
+            SunmiKeyboardHandler.enableHandler({key: HandleableKey.L2Ks_6}),
+            SunmiKeyboardHandler.enableHandler({key: HandleableKey.L2Ks_7}),
+            SunmiKeyboardHandler.enableHandler({key: HandleableKey.L2Ks_8}),
+            SunmiKeyboardHandler.enableHandler({key: HandleableKey.L2Ks_9}),
+            SunmiKeyboardHandler.enableHandler({key: HandleableKey.L2Ks_0}),
+            SunmiKeyboardHandler.enableHandler({key: HandleableKey.L2Ks_PERIOD}),
         ]);
     }
   }

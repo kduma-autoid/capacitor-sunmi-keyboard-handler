@@ -15,7 +15,11 @@ public class DeviceIdentificationHelper {
      * Sunmi L2Ks
      */
     public static boolean isSunmiL2KsFunctionKeysKeyboard(InputDevice device) {
-        return device.getVendorId() == 0 && device.getProductId() == 0 && device.getName().contains("aw9523-key");
+        boolean keypad = device.getVendorId() == 0 && device.getProductId() == 0 && device.getName().contains("aw9523-key");
+        boolean r_dpad = device.getVendorId() == 1 && device.getProductId() == 1 && device.getName().contains("mtk-pmic-keys");
+        boolean l_dpad = device.getVendorId() == 0 && device.getProductId() == 0 && device.getName().contains("mtk-kpd");
+
+        return keypad || r_dpad || l_dpad;
     }
 
     /**
