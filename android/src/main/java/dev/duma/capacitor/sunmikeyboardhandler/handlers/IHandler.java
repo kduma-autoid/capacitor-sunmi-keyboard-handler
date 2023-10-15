@@ -9,6 +9,7 @@ import dev.duma.capacitor.sunmikeyboardhandler.enums.HandleableKeyEnum;
 import dev.duma.capacitor.sunmikeyboardhandler.enums.ModifierKeyEnum;
 
 public interface IHandler {
+    boolean provides(HandleableKeyEnum key);
     boolean canBeHandled(KeyEvent event, EnumSet<HandleableKeyEnum> handledKeys);
     boolean handle(KeyEvent event);
 
@@ -18,7 +19,11 @@ public interface IHandler {
         }
 
         void onKeyPressed(HandleableKeyEnum key, boolean pressed, ArrayList<ModifierKeyEnum> modifiers);
+
         void onBarcodeScanned(String barcode, String device, int id);
+
         void onDebug(KeyEvent event);
+
+        void onKeyboardInput(HandleableKeyEnum groupKey, char value, HandleableKeyEnum key, boolean isWhiteChar);
     }
 }

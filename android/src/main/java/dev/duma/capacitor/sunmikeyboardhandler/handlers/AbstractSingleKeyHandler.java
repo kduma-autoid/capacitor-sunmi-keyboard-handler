@@ -3,15 +3,20 @@ package dev.duma.capacitor.sunmikeyboardhandler.handlers;
 import static android.view.KeyEvent.ACTION_DOWN;
 import static android.view.KeyEvent.ACTION_UP;
 
-import android.view.InputDevice;
 import android.view.KeyEvent;
 
-import java.util.EnumSet;
 
 import dev.duma.capacitor.sunmikeyboardhandler.enums.HandleableKeyEnum;
 
 abstract public class AbstractSingleKeyHandler extends AbstractKeyHandler {
     private boolean isButtonPressed = false;
+
+    @Override
+    public boolean provides(HandleableKeyEnum key) {
+        return key == provides();
+    }
+
+    abstract protected HandleableKeyEnum provides();
 
     public AbstractSingleKeyHandler(Callback callback) {
         super(callback);

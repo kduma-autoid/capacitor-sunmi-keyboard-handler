@@ -20,7 +20,9 @@ import dev.duma.capacitor.sunmikeyboardhandler.enums.KeyEventEnum;
 import dev.duma.capacitor.sunmikeyboardhandler.enums.ModifierKeyEnum;
 import dev.duma.capacitor.sunmikeyboardhandler.handlers.DebugKeyHandler;
 import dev.duma.capacitor.sunmikeyboardhandler.handlers.IHandler;
+import dev.duma.capacitor.sunmikeyboardhandler.handlers.Sunmi89KeyKeyboardHandler;
 import dev.duma.capacitor.sunmikeyboardhandler.handlers.Sunmi89KeyKeyboardKeyHandler;
+import dev.duma.capacitor.sunmikeyboardhandler.handlers.Sunmi89KeyNumPadHandler;
 import dev.duma.capacitor.sunmikeyboardhandler.handlers.SunmiBarcodeScannerKeyHandler;
 import dev.duma.capacitor.sunmikeyboardhandler.handlers.SunmiL2KKeyboardKeyHandler;
 import dev.duma.capacitor.sunmikeyboardhandler.handlers.SunmiL2KsKeyboardKeyHandler;
@@ -75,7 +77,7 @@ public class SunmiKeyboardHandlerPlugin extends Plugin implements KeyHandlerInte
 
             JSObject ret = new JSObject();
 //            ret.put("event", event.toString());
-            ret.put("char", event.isPrintingKey() ? Character.toString((char) event.getUnicodeChar()) : null);
+            ret.put("char", Character.toString((char) event.getUnicodeChar()));
             ret.put("number", Character.toString((char) event.getNumber()));
             ret.put("label", Character.toString((char) event.getDisplayLabel()));
             ret.put("key-code", KeyEvent.keyCodeToString(event.getKeyCode()));
@@ -89,6 +91,17 @@ public class SunmiKeyboardHandlerPlugin extends Plugin implements KeyHandlerInte
 
             notifyListeners("onDebug", ret);
         }
+
+        @Override
+        public void onKeyboardInput(HandleableKeyEnum groupKey, char value, HandleableKeyEnum key, boolean isWhiteChar) {
+            JSObject ret = new JSObject();
+            ret.put("groupKey", groupKey.toString());
+            ret.put("key", key.toString());
+            ret.put("value", value != 0 ? Character.toString(value) : null);
+            ret.put("isWhiteChar", isWhiteChar);
+
+            notifyListeners("onKeyboardInput", ret);
+        }
     };
 
     protected List<IHandler> keyHandlers = new ArrayList<>(Arrays.asList(
@@ -101,6 +114,9 @@ public class SunmiKeyboardHandlerPlugin extends Plugin implements KeyHandlerInte
             new Sunmi89KeyKeyboardKeyHandler(callback),
 
             new SunmiBarcodeScannerKeyHandler(callback),
+
+            new Sunmi89KeyKeyboardHandler(callback),
+            new Sunmi89KeyNumPadHandler(callback),
 
             new DebugKeyHandler(callback)
     ));
@@ -119,11 +135,8 @@ public class SunmiKeyboardHandlerPlugin extends Plugin implements KeyHandlerInte
     @Override
     public boolean handle(KeyEvent event) {
         for (IHandler handler : keyHandlers) {
-            if(!handler.canBeHandled(event, handledKeys))
-                continue;
-
-            handler.handle(event);
-            return true;
+            if(handler.canBeHandled(event, handledKeys) && handler.handle(event))
+                return true;
         }
 
         return false;

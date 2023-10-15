@@ -7,14 +7,11 @@ import java.util.EnumSet;
 
 import dev.duma.capacitor.sunmikeyboardhandler.enums.HandleableKeyEnum;
 
-abstract public class AbstractKeyHandler implements IHandler {
-    protected final Callback callback;
-
+abstract public class AbstractKeyHandler extends AbstractHandler {
     public AbstractKeyHandler(Callback callback) {
-        this.callback = callback;
+        super(callback);
     }
 
-    abstract protected boolean isCompatibleDevice(InputDevice device, KeyEvent event);
     abstract protected HandleableKeyEnum getHandleableKey(KeyEvent event);
     abstract protected void handleCallback(KeyEvent event, HandleableKeyEnum handleableKey);
 

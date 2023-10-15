@@ -6,6 +6,11 @@ import android.view.KeyEvent;
 import dev.duma.capacitor.sunmikeyboardhandler.enums.HandleableKeyEnum;
 
 public class SunmiL2kShortcutKeyHandler extends AbstractSingleKeyHandler {
+    @Override
+    protected HandleableKeyEnum provides() {
+        return HandleableKeyEnum.L2k_Shortcut;
+    }
+
     public SunmiL2kShortcutKeyHandler(Callback callback) {
         super(callback);
     }
@@ -20,6 +25,6 @@ public class SunmiL2kShortcutKeyHandler extends AbstractSingleKeyHandler {
         if(event.getKeyCode() != 285)
             return null;
 
-        return HandleableKeyEnum.L2k_Shortcut;
+        return provides();
     }
 }

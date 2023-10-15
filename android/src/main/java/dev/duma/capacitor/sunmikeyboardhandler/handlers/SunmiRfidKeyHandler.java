@@ -6,6 +6,11 @@ import android.view.KeyEvent;
 import dev.duma.capacitor.sunmikeyboardhandler.enums.HandleableKeyEnum;
 
 public class SunmiRfidKeyHandler extends AbstractSingleKeyHandler {
+    @Override
+    protected HandleableKeyEnum provides() {
+        return HandleableKeyEnum.Sunmi_RFID;
+    }
+
     public SunmiRfidKeyHandler(Callback callback) {
         super(callback);
     }
@@ -23,6 +28,6 @@ public class SunmiRfidKeyHandler extends AbstractSingleKeyHandler {
         if(event.getKeyCode() != 288)
             return null;
 
-        return HandleableKeyEnum.Sunmi_RFID;
+        return provides();
     }
 }

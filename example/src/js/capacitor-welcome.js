@@ -91,8 +91,18 @@ window.customElements.define(
             printToOutput('onDebug', JSON.stringify(e, null, 3));
         });
 
+        SunmiKeyboardHandler.addListener('onKeyboardInput', (e) => {
+            printToOutput('onKeyboardInput', JSON.stringify(e, null, 3));
+        });
+
         await Promise.all([
+            SunmiKeyboardHandler.enableHandler({key: HandleableKey.Sunmi89KeyKeyboard_KeyPad}),
+            SunmiKeyboardHandler.enableHandler({key: HandleableKey.Sunmi89KeyKeyboard_NumPad}),
+
             SunmiKeyboardHandler.enableHandler({key: HandleableKey.Barcode_Any}),
+            SunmiKeyboardHandler.enableHandler({key: HandleableKey.Barcode_BuiltIn}),
+            SunmiKeyboardHandler.enableHandler({key: HandleableKey.Barcode_Blink}),
+            SunmiKeyboardHandler.enableHandler({key: HandleableKey.Barcode_Handheld}),
 
             SunmiKeyboardHandler.enableHandler({key: HandleableKey.Debug}),
 

@@ -11,6 +11,11 @@ import dev.duma.capacitor.sunmikeyboardhandler.KeyHandlerInterface;
 import dev.duma.capacitor.sunmikeyboardhandler.enums.HandleableKeyEnum;
 
 public class SunmiL2sShortcutKeyHandler  extends AbstractSingleKeyHandler {
+    @Override
+    protected HandleableKeyEnum provides() {
+        return HandleableKeyEnum.L2s_Shortcut;
+    }
+
     public SunmiL2sShortcutKeyHandler(Callback callback) {
         super(callback);
     }
@@ -25,6 +30,6 @@ public class SunmiL2sShortcutKeyHandler  extends AbstractSingleKeyHandler {
         if(event.getKeyCode() != KEYCODE_F11)
             return null;
 
-        return HandleableKeyEnum.L2s_Shortcut;
+        return provides();
     }
 }

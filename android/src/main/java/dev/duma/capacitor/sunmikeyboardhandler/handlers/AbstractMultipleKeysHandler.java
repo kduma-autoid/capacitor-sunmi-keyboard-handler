@@ -14,7 +14,7 @@ import java.util.Map;
 import dev.duma.capacitor.sunmikeyboardhandler.enums.HandleableKeyEnum;
 import dev.duma.capacitor.sunmikeyboardhandler.enums.ModifierKeyEnum;
 
-abstract public class AbstractMultipleKeysHandler extends AbstractSingleKeyHandler {
+abstract public class AbstractMultipleKeysHandler extends AbstractKeyHandler {
     private final EnumSet<HandleableKeyEnum> buttonsPressed = EnumSet.noneOf(HandleableKeyEnum.class);
 
     public AbstractMultipleKeysHandler(Callback callback) {
@@ -24,10 +24,19 @@ abstract public class AbstractMultipleKeysHandler extends AbstractSingleKeyHandl
     protected abstract Map<HandleableKeyEnum, Integer> getHandleableKeysMap();
 
     @Override
-    protected HandleableKeyEnum getHandleableKey(KeyEvent event) {
-        Map<HandleableKeyEnum, Integer> handleableKeys = getHandleableKeysMap();
+    public boolean provides(HandleableKeyEnum key) {
+        for (Map.Entry<HandleableKeyEnum, Integer> entry : getHandleableKeysMap().entrySet()) {
+            if (entry.getKey() == key) {
+                return true;
+            }
+        }
 
-        for (Map.Entry<HandleableKeyEnum, Integer> entry : handleableKeys.entrySet()) {
+        return false;
+    }
+
+    @Override
+    protected HandleableKeyEnum getHandleableKey(KeyEvent event) {
+        for (Map.Entry<HandleableKeyEnum, Integer> entry : getHandleableKeysMap().entrySet()) {
             if (entry.getValue() == event.getKeyCode()) {
                 return entry.getKey();
             }

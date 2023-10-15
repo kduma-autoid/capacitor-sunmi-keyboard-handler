@@ -1,6 +1,9 @@
 import {PluginListenerHandle} from "@capacitor/core";
 
 export enum HandleableKey {
+  Sunmi89KeyKeyboard_KeyPad = "89_KEYPAD",
+  Sunmi89KeyKeyboard_NumPad = "89_NUMPAD",
+
   Sunmi89KeyKeyboard_Esc = "89_ESC",
   Sunmi89KeyKeyboard_F1 = "89_F1",
   Sunmi89KeyKeyboard_F2 = "89_F2",
@@ -83,6 +86,79 @@ export enum HandleableKey {
   Barcode_Blink = "BARCODE_BLINK",
 
   Debug = "DEBUG",
+
+  Sunmi89KeyKeyboard_Grave = "89_GRAVE",
+  Sunmi89KeyKeyboard_Tab = "89_TAB",
+  Sunmi89KeyKeyboard_Slash = "89_SLASH",
+  Sunmi89KeyKeyboard_Space = "89_SPACE",
+  Sunmi89KeyKeyboard_Apostrophe = "89_APOSTROPHE",
+  Sunmi89KeyKeyboard_Left = "89_LEFT",
+  Sunmi89KeyKeyboard_Down = "89_DOWN",
+  Sunmi89KeyKeyboard_Right = "89_RIGHT",
+  Sunmi89KeyKeyboard_Up = "89_UP",
+  Sunmi89KeyKeyboard_Period = "89_PERIOD",
+  Sunmi89KeyKeyboard_Comma = "89_COMMA",
+  Sunmi89KeyKeyboard_BackSlash = "89_BACKSLASH",
+  Sunmi89KeyKeyboard_Enter = "89_ENTER",
+  Sunmi89KeyKeyboard_Del = "89_DEL",
+  Sunmi89KeyKeyboard_Minus = "89_MINUS",
+  Sunmi89KeyKeyboard_Equals = "89_EQUALS",
+  Sunmi89KeyKeyboard_RightBracket = "89_RIGHT_BRACKET",
+  Sunmi89KeyKeyboard_LeftBracket = "89_LEFT_BRACKET",
+  Sunmi89KeyKeyboard_Semicolon = "89_SEMICOLON",
+  Sunmi89KeyKeyboard_1 = "89_1",
+  Sunmi89KeyKeyboard_2 = "89_2",
+  Sunmi89KeyKeyboard_3 = "89_3",
+  Sunmi89KeyKeyboard_4 = "89_4",
+  Sunmi89KeyKeyboard_5 = "89_5",
+  Sunmi89KeyKeyboard_6 = "89_6",
+  Sunmi89KeyKeyboard_7 = "89_7",
+  Sunmi89KeyKeyboard_8 = "89_8",
+  Sunmi89KeyKeyboard_9 = "89_9",
+  Sunmi89KeyKeyboard_0 = "89_0",
+  Sunmi89KeyKeyboard_Q = "89_Q",
+  Sunmi89KeyKeyboard_W = "89_W",
+  Sunmi89KeyKeyboard_E = "89_E",
+  Sunmi89KeyKeyboard_R = "89_R",
+  Sunmi89KeyKeyboard_T = "89_T",
+  Sunmi89KeyKeyboard_Y = "89_Y",
+  Sunmi89KeyKeyboard_U = "89_U",
+  Sunmi89KeyKeyboard_I = "89_I",
+  Sunmi89KeyKeyboard_O = "89_O",
+  Sunmi89KeyKeyboard_P = "89_P",
+  Sunmi89KeyKeyboard_A = "89_A",
+  Sunmi89KeyKeyboard_S = "89_S",
+  Sunmi89KeyKeyboard_D = "89_D",
+  Sunmi89KeyKeyboard_F = "89_F",
+  Sunmi89KeyKeyboard_G = "89_G",
+  Sunmi89KeyKeyboard_H = "89_H",
+  Sunmi89KeyKeyboard_J = "89_J",
+  Sunmi89KeyKeyboard_K = "89_K",
+  Sunmi89KeyKeyboard_L = "89_L",
+  Sunmi89KeyKeyboard_Z = "89_Z",
+  Sunmi89KeyKeyboard_X = "89_X",
+  Sunmi89KeyKeyboard_C = "89_C",
+  Sunmi89KeyKeyboard_V = "89_V",
+  Sunmi89KeyKeyboard_B = "89_B",
+  Sunmi89KeyKeyboard_N = "89_N",
+  Sunmi89KeyKeyboard_M = "89_M",
+
+  Sunmi89KeyKeyboard_NumPad0 = "89_NUMPAD0",
+  Sunmi89KeyKeyboard_NumPad1 = "89_NUMPAD1",
+  Sunmi89KeyKeyboard_NumPad2 = "89_NUMPAD2",
+  Sunmi89KeyKeyboard_NumPad3 = "89_NUMPAD3",
+  Sunmi89KeyKeyboard_NumPad4 = "89_NUMPAD4",
+  Sunmi89KeyKeyboard_NumPad5 = "89_NUMPAD5",
+  Sunmi89KeyKeyboard_NumPad6 = "89_NUMPAD6",
+  Sunmi89KeyKeyboard_NumPad7 = "89_NUMPAD7",
+  Sunmi89KeyKeyboard_NumPad8 = "89_NUMPAD8",
+  Sunmi89KeyKeyboard_NumPad9 = "89_NUMPAD9",
+  Sunmi89KeyKeyboard_NumPadDot = "89_NUMPADDOT",
+  Sunmi89KeyKeyboard_NumPadDivide = "89_NUMPADDIVIDE",
+  Sunmi89KeyKeyboard_NumPadMultiply = "89_NUMPADMULTIPLY",
+  Sunmi89KeyKeyboard_NumPadSubtract = "89_NUMPADSUBTRACT",
+  Sunmi89KeyKeyboard_NumPadAdd = "89_NUMPADADD",
+  Sunmi89KeyKeyboard_NumPadEnter = "89_NUMPADENTER",
 }
 
 export enum ModifierKey {
@@ -97,6 +173,7 @@ export enum KeyEvent {
   KeyUp = "KEY_UP",
 }
 
+export type OnKeyboardInputCallback = (data: { groupKey: HandleableKey, key: HandleableKey, value: string, isWhiteChar: boolean }) => void;
 export type OnKeyPressedCallback = (data: { key: HandleableKey, modifiers: ModifierKey[], type: KeyEvent }) => void;
 export type OnBarcodeScannedCallback = (data: { barcode: string, device: { type: string, id: number } }) => void;
 export type OnDebugCallback = (data: any ) => void;
@@ -134,5 +211,13 @@ export interface SunmiKeyboardHandlerPlugin {
   addListener(
       eventName: 'onDebug',
       listenerFunc: OnDebugCallback,
+  ): Promise<PluginListenerHandle> & PluginListenerHandle;
+
+  /**
+   *
+   */
+  addListener(
+      eventName: 'onKeyboardInput',
+      listenerFunc: OnKeyboardInputCallback,
   ): Promise<PluginListenerHandle> & PluginListenerHandle;
 }

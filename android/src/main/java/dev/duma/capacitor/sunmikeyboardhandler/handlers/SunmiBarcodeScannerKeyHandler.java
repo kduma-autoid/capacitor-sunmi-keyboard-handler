@@ -16,18 +16,20 @@ import java.util.Set;
 import dev.duma.capacitor.sunmikeyboardhandler.enums.HandleableKeyEnum;
 
 public class SunmiBarcodeScannerKeyHandler implements IHandler {
-    private static final Set<HandleableKeyEnum> COMPATIBLE_FUNCTION_BUTTONS = Collections.unmodifiableSet(
-        EnumSet.of(
-            HandleableKeyEnum.Barcode_Any,
-            HandleableKeyEnum.Barcode_BuiltIn,
-            HandleableKeyEnum.Barcode_Handheld,
-            HandleableKeyEnum.Barcode_Blink
-        )
-    );
     protected Callback callback;
 
     public SunmiBarcodeScannerKeyHandler(Callback callback) {
         this.callback = callback;
+    }
+
+    @Override
+    public boolean provides(HandleableKeyEnum key) {
+        return EnumSet.of(
+                HandleableKeyEnum.Barcode_Any,
+                HandleableKeyEnum.Barcode_BuiltIn,
+                HandleableKeyEnum.Barcode_Handheld,
+                HandleableKeyEnum.Barcode_Blink
+        ).contains(key);
     }
 
     @Override

@@ -15,6 +15,11 @@ import dev.duma.capacitor.sunmikeyboardhandler.enums.HandleableKeyEnum;
 public class DebugKeyHandler implements IHandler {
     private final Callback callback;
 
+    @Override
+    public boolean provides(HandleableKeyEnum key) {
+        return HandleableKeyEnum.Debug == key;
+    }
+
     public DebugKeyHandler(Callback callback) {
         this.callback = callback;
     }
