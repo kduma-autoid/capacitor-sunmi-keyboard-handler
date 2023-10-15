@@ -61,14 +61,31 @@ public class SunmiKeyboardHandlerPlugin extends Plugin implements KeyHandlerInte
 
         @Override
         public void onDebug(KeyEvent event) {
+            if(event.getKeyCode() == KeyEvent.KEYCODE_KATAKANA_HIRAGANA)
+                return;
+            if(event.getRepeatCount() != 0)
+                return;
+
+
+            JSObject device = new JSObject();
+            device.put("vendor-id", event.getDevice().getVendorId());
+            device.put("product-id", event.getDevice().getProductId());
+            device.put("name", event.getDevice().getName());
+             device.put("other", event.getDevice().toString());
+
             JSObject ret = new JSObject();
-            ret.put("event", event.toString());
-            ret.put("source", event.getSource());
-            ret.put("eventKeyCode", event.getKeyCode());
-            ret.put("device", event.getDevice().toString());
-            ret.put("deviceVendorId", event.getDevice().getVendorId());
-            ret.put("deviceProductId", event.getDevice().getProductId());
-            ret.put("deviceName", event.getDevice().getName());
+//            ret.put("event", event.toString());
+            ret.put("char", event.isPrintingKey() ? Character.toString((char) event.getUnicodeChar()) : null);
+            ret.put("number", Character.toString((char) event.getNumber()));
+            ret.put("label", Character.toString((char) event.getDisplayLabel()));
+            ret.put("key-code", KeyEvent.keyCodeToString(event.getKeyCode()));
+            ret.put("action", switch(event.getAction()) {
+                case KeyEvent.ACTION_DOWN -> "ACTION_DOWN";
+                case KeyEvent.ACTION_UP -> "ACTION_UP";
+                case KeyEvent.ACTION_MULTIPLE -> "ACTION_MULTIPLE";
+                default -> "UNKNOWN";
+            });
+//            ret.put("device", device);
 
             notifyListeners("onDebug", ret);
         }
