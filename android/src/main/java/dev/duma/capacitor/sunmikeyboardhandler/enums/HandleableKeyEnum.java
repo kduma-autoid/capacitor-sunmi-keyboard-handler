@@ -24,6 +24,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum HandleableKeyEnum implements Labeled {
+    L2Ks_KeyPad("L2KS_KEYPAD"),
+    L2K_KeyPad("L2K_KEYPAD"),
     Sunmi89KeyKeyboard_KeyPad("89_KEYPAD"),
     Sunmi89KeyKeyboard_NumPad("89_NUMPAD"),
 

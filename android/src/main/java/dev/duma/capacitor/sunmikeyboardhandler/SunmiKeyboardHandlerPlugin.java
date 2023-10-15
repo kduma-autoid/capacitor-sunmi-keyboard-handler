@@ -25,7 +25,9 @@ import dev.duma.capacitor.sunmikeyboardhandler.handlers.Sunmi89KeyKeyboardKeyHan
 import dev.duma.capacitor.sunmikeyboardhandler.handlers.Sunmi89KeyNumPadHandler;
 import dev.duma.capacitor.sunmikeyboardhandler.handlers.SunmiBarcodeScannerKeyHandler;
 import dev.duma.capacitor.sunmikeyboardhandler.handlers.SunmiL2KKeyboardKeyHandler;
+import dev.duma.capacitor.sunmikeyboardhandler.handlers.SunmiL2KNumPadHandler;
 import dev.duma.capacitor.sunmikeyboardhandler.handlers.SunmiL2KsKeyboardKeyHandler;
+import dev.duma.capacitor.sunmikeyboardhandler.handlers.SunmiL2KsNumPadHandler;
 import dev.duma.capacitor.sunmikeyboardhandler.handlers.SunmiL2kShortcutKeyHandler;
 import dev.duma.capacitor.sunmikeyboardhandler.handlers.SunmiL2sShortcutKeyHandler;
 import dev.duma.capacitor.sunmikeyboardhandler.handlers.SunmiRfidKeyHandler;
@@ -63,20 +65,16 @@ public class SunmiKeyboardHandlerPlugin extends Plugin implements KeyHandlerInte
 
         @Override
         public void onDebug(KeyEvent event) {
-            if(event.getKeyCode() == KeyEvent.KEYCODE_KATAKANA_HIRAGANA)
-                return;
             if(event.getRepeatCount() != 0)
                 return;
-
 
             JSObject device = new JSObject();
             device.put("vendor-id", event.getDevice().getVendorId());
             device.put("product-id", event.getDevice().getProductId());
             device.put("name", event.getDevice().getName());
-             device.put("other", event.getDevice().toString());
+            device.put("other", event.getDevice().toString());
 
             JSObject ret = new JSObject();
-//            ret.put("event", event.toString());
             ret.put("char", Character.toString((char) event.getUnicodeChar()));
             ret.put("number", Character.toString((char) event.getNumber()));
             ret.put("label", Character.toString((char) event.getDisplayLabel()));
@@ -87,7 +85,8 @@ public class SunmiKeyboardHandlerPlugin extends Plugin implements KeyHandlerInte
                 case KeyEvent.ACTION_MULTIPLE -> "ACTION_MULTIPLE";
                 default -> "UNKNOWN";
             });
-//            ret.put("device", device);
+            ret.put("device", device);
+            ret.put("event", event.toString());
 
             notifyListeners("onDebug", ret);
         }
@@ -104,7 +103,8 @@ public class SunmiKeyboardHandlerPlugin extends Plugin implements KeyHandlerInte
         }
     };
 
-    protected List<IHandler> keyHandlers = new ArrayList<>(Arrays.asList(
+    protected List<IHandler> keyHandlers = null;
+    protected List<IHandler> allKeyHandlers = new ArrayList<>(Arrays.asList(
             new SunmiL2sShortcutKeyHandler(callback),
             new SunmiL2kShortcutKeyHandler(callback),
             new SunmiRfidKeyHandler(callback),
@@ -117,6 +117,8 @@ public class SunmiKeyboardHandlerPlugin extends Plugin implements KeyHandlerInte
 
             new Sunmi89KeyKeyPadHandler(callback),
             new Sunmi89KeyNumPadHandler(callback),
+            new SunmiL2KsNumPadHandler(callback),
+            new SunmiL2KNumPadHandler(callback),
 
             new DebugKeyHandler(callback)
     ));
@@ -134,6 +136,19 @@ public class SunmiKeyboardHandlerPlugin extends Plugin implements KeyHandlerInte
 
     @Override
     public boolean handle(KeyEvent event) {
+        if(keyHandlers == null) {
+            keyHandlers = new ArrayList<>();
+
+            for (IHandler handler : allKeyHandlers) {
+                for (HandleableKeyEnum key : handledKeys) {
+                    if(handler.provides(key)) {
+                        keyHandlers.add(handler);
+                        break;
+                    }
+                }
+            }
+        }
+
         for (IHandler handler : keyHandlers) {
             if(handler.canBeHandled(event, handledKeys) && handler.handle(event))
                 return true;
@@ -152,6 +167,7 @@ public class SunmiKeyboardHandlerPlugin extends Plugin implements KeyHandlerInte
         }
 
         handledKeys.add(key);
+        keyHandlers = null;
 
         call.resolve();
     }
@@ -166,6 +182,7 @@ public class SunmiKeyboardHandlerPlugin extends Plugin implements KeyHandlerInte
         }
 
         handledKeys.remove(key);
+        keyHandlers = null;
 
         call.resolve();
     }

@@ -3,6 +3,8 @@ import {PluginListenerHandle} from "@capacitor/core";
 export enum HandleableKey {
   Sunmi89KeyKeyboard_KeyPad = "89_KEYPAD",
   Sunmi89KeyKeyboard_NumPad = "89_NUMPAD",
+  L2Ks_KeyPad = "L2KS_KEYPAD",
+  L2K_KeyPad = "L2K_KEYPAD",
 
   Sunmi89KeyKeyboard_Esc = "89_ESC",
   Sunmi89KeyKeyboard_F1 = "89_F1",
@@ -77,8 +79,8 @@ export enum HandleableKey {
   L2K_CENTER = "L2K_CENTER",
 
   L2s_Shortcut = "L2S_SHORTCUT",
-  L2k_Shortcut = "L2K_SHORTCUT",
-  Sunmi_RFID = "RFID",
+  L2K_Shortcut = "L2K_SHORTCUT",
+  RFID = "RFID",
 
   Barcode_Any = "BARCODE",
   Barcode_BuiltIn = "BARCODE_BUILTIN",

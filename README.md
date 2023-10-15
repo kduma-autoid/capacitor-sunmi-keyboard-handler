@@ -198,6 +198,8 @@ addListener(eventName: 'onKeyboardInput', listenerFunc: OnKeyboardInputCallback)
 | --------------------------------------- | -------------------------------- |
 | **`Sunmi89KeyKeyboard_KeyPad`**         | <code>"89_KEYPAD"</code>         |
 | **`Sunmi89KeyKeyboard_NumPad`**         | <code>"89_NUMPAD"</code>         |
+| **`L2Ks_KeyPad`**                       | <code>"L2KS_KEYPAD"</code>       |
+| **`L2K_KeyPad`**                        | <code>"L2K_KEYPAD"</code>        |
 | **`Sunmi89KeyKeyboard_Esc`**            | <code>"89_ESC"</code>            |
 | **`Sunmi89KeyKeyboard_F1`**             | <code>"89_F1"</code>             |
 | **`Sunmi89KeyKeyboard_F2`**             | <code>"89_F2"</code>             |
