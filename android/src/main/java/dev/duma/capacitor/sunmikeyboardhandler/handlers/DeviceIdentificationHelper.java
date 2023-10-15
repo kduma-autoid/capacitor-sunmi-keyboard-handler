@@ -71,4 +71,8 @@ public class DeviceIdentificationHelper {
 
         return true;
     }
+
+    public static boolean isSunmiL2KFunctionKeysKeyboard(InputDevice device) {
+        return device.getVendorId() == 0 && device.getProductId() == 0 && device.getName().contains("soc:matrix-keypad");
+    }
 }
