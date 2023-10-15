@@ -1,46 +1,25 @@
 package dev.duma.capacitor.sunmikeyboardhandler.handlers;
 
-import static android.view.KeyEvent.ACTION_DOWN;
-import static android.view.KeyEvent.ACTION_UP;
-import static android.view.KeyEvent.KEYCODE_F11;
-
 import android.view.InputDevice;
 import android.view.KeyEvent;
 
-import dev.duma.capacitor.sunmikeyboardhandler.KeyHandlerInterface;
+import dev.duma.capacitor.sunmikeyboardhandler.enums.HandleableKeyEnum;
 
-public class SunmiL2kShortcutKeyHandler implements KeyHandlerInterface {
-    public interface SunmiL2kShortcutKeyHandlerCallback {
-        void onKeyPressed(boolean pressed);
+public class SunmiL2kShortcutKeyHandler extends AbstractSingleKeyHandler {
+    public SunmiL2kShortcutKeyHandler(Callback callback) {
+        super(callback);
     }
-
-    protected SunmiL2kShortcutKeyHandlerCallback callback;
-
-    public SunmiL2kShortcutKeyHandler(SunmiL2kShortcutKeyHandlerCallback callback) {
-        this.callback = callback;
-    }
-
-    private boolean isButtonPressed = false;
 
     @Override
-    public synchronized boolean handle(KeyEvent event) {
+    protected boolean isCompatibleDevice(InputDevice device, KeyEvent event) {
+        return device.getVendorId() == 1 && device.getProductId() == 1 && device.getName().contains("gpio-keys");
+    }
 
-        InputDevice device = event.getDevice();
+    @Override
+    protected HandleableKeyEnum getHandleableKey(KeyEvent event) {
+        if(event.getKeyCode() != 285)
+            return null;
 
-        if ((device.getVendorId() != 1 || device.getProductId() != 1) && !device.getName().contains("gpio-keys"))
-            return false;
-
-        if (event.getKeyCode() != 285) // Sunmi L2k Side Shortcut Key
-            return false;
-
-        if (event.getAction() == ACTION_DOWN && !isButtonPressed) {
-            isButtonPressed = true;
-            callback.onKeyPressed(true);
-        } else if (event.getAction() == ACTION_UP && isButtonPressed) {
-            isButtonPressed = false;
-            callback.onKeyPressed(false);
-        }
-
-        return true;
+        return HandleableKeyEnum.L2k_Shortcut;
     }
 }

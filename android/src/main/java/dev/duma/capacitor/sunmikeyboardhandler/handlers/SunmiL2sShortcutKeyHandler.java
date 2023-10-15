@@ -8,39 +8,23 @@ import android.view.InputDevice;
 import android.view.KeyEvent;
 
 import dev.duma.capacitor.sunmikeyboardhandler.KeyHandlerInterface;
+import dev.duma.capacitor.sunmikeyboardhandler.enums.HandleableKeyEnum;
 
-public class SunmiL2sShortcutKeyHandler implements KeyHandlerInterface {
-    public interface SunmiL2sShortcutKeyHandlerCallback {
-        void onKeyPressed(boolean pressed);
+public class SunmiL2sShortcutKeyHandler  extends AbstractSingleKeyHandler {
+    public SunmiL2sShortcutKeyHandler(Callback callback) {
+        super(callback);
     }
-
-    protected SunmiL2sShortcutKeyHandlerCallback callback;
-
-    public SunmiL2sShortcutKeyHandler(SunmiL2sShortcutKeyHandlerCallback callback) {
-        this.callback = callback;
-    }
-
-    private boolean isButtonPressed = false;
 
     @Override
-    public synchronized boolean handle(KeyEvent event) {
+    protected boolean isCompatibleDevice(InputDevice device, KeyEvent event) {
+        return device.getVendorId() == 9300 && device.getProductId() == 25856 && device.getName().contains("mtk-kpd");
+    }
 
-        InputDevice device = event.getDevice();
+    @Override
+    protected HandleableKeyEnum getHandleableKey(KeyEvent event) {
+        if(event.getKeyCode() != KEYCODE_F11)
+            return null;
 
-        if ((device.getVendorId() != 9300 || device.getProductId() != 25856) && !device.getName().contains("mtk-kpd")) // Sunmi built-in buttons
-            return false;
-
-        if (event.getKeyCode() != KEYCODE_F11) // Sunmi L2s Shortcut
-            return false;
-
-        if (event.getAction() == ACTION_DOWN && !isButtonPressed) {
-            isButtonPressed = true;
-            callback.onKeyPressed(true);
-        } else if (event.getAction() == ACTION_UP && isButtonPressed) {
-            isButtonPressed = false;
-            callback.onKeyPressed(false);
-        }
-
-        return true;
+        return HandleableKeyEnum.L2s_Shortcut;
     }
 }

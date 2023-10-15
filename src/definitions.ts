@@ -1,27 +1,34 @@
-export type CallbackID = string;
+import {PluginListenerHandle} from "@capacitor/core";
 
 export enum HandleableKey {
-  Esc = "ESC",
-  F1 = "F1",
-  F2 = "F2",
-  F3 = "F3",
-  F4 = "F4",
-  F5 = "F5",
-  F6 = "F6",
-  F7 = "F7",
-  F8 = "F8",
-  F9 = "F9",
-  F10 = "F10",
-  Delete = "DELETE",
-  Home = "HOME",
-  End = "END",
-  PgUp = "PGUP",
-  PgDn = "PGDN",
-  Cash = "CASH",
+  Sunmi89KeyKeyboard_Esc = "89_ESC",
+  Sunmi89KeyKeyboard_F1 = "89_F1",
+  Sunmi89KeyKeyboard_F2 = "89_F2",
+  Sunmi89KeyKeyboard_F3 = "89_F3",
+  Sunmi89KeyKeyboard_F4 = "89_F4",
+  Sunmi89KeyKeyboard_F5 = "89_F5",
+  Sunmi89KeyKeyboard_F6 = "89_F6",
+  Sunmi89KeyKeyboard_F7 = "89_F7",
+  Sunmi89KeyKeyboard_F8 = "89_F8",
+  Sunmi89KeyKeyboard_F9 = "89_F9",
+  Sunmi89KeyKeyboard_F10 = "89_F10",
+  Sunmi89KeyKeyboard_Delete = "89_DELETE",
+  Sunmi89KeyKeyboard_Home = "89_HOME",
+  Sunmi89KeyKeyboard_End = "89_END",
+  Sunmi89KeyKeyboard_PgUp = "89_PGUP",
+  Sunmi89KeyKeyboard_PgDn = "89_PGDN",
+  Sunmi89KeyKeyboard_Cash = "89_CASH",
 
   L2s_Shortcut = "L2S_SHORTCUT",
   L2k_Shortcut = "L2K_SHORTCUT",
-  RFID = "RFID",
+  Sunmi_RFID = "RFID",
+
+  Barcode_Any = "BARCODE",
+  Barcode_BuiltIn = "BARCODE_BUILTIN",
+  Barcode_Handheld = "BARCODE_HANDHELD",
+  Barcode_Blink = "BARCODE_BLINK",
+
+  Debug = "DEBUG",
 }
 
 export enum ModifierKey {
@@ -35,38 +42,42 @@ export enum KeyEvent {
   KeyUp = "KEY_UP",
 }
 
-export type KeyHandlerCallback = (data: { key: HandleableKey, modifiers: ModifierKey[], type: KeyEvent }) => void;
-export type BarcodeHandlerCallback = (data: { barcode: string, device: { type: string, id: number } }) => void;
-export type DebugHandlerCallback = (data: any ) => void;
+export type OnKeyPressedCallback = (data: { key: HandleableKey, modifiers: ModifierKey[], type: KeyEvent }) => void;
+export type OnBarcodeScannedCallback = (data: { barcode: string, device: { type: string, id: number } }) => void;
+export type OnDebugCallback = (data: any ) => void;
 
 export interface SunmiKeyboardHandlerPlugin {
   /**
    * Set a callback to be called when a key specified in `key` parameter is pressed.
    */
-  setKeyHandler(options: { key: HandleableKey }, callback: KeyHandlerCallback): Promise<CallbackID>;
+  enableHandler(options: { key: HandleableKey }): Promise<void>;
 
   /**
    * Remove a callback set by `setKeyHandler` for a key specified in `key` parameter.
    */
-  removeKeyHandler(options: { key: HandleableKey }): Promise<void>;
+  disableHandler(options: { key: HandleableKey }): Promise<void>;
 
   /**
-   * Set a callback to be called when a barcode is scanned.
+   *
    */
-  setBarcodeHandler(callback: BarcodeHandlerCallback): Promise<CallbackID>;
+  addListener(
+      eventName: 'onKeyPressed',
+      listenerFunc: OnKeyPressedCallback,
+  ): Promise<PluginListenerHandle> & PluginListenerHandle;
 
   /**
-   * Remove a callback set by `setBarcodeHandler`.
+   *
    */
-  removeBarcodeHandler(): Promise<void>;
+  addListener(
+      eventName: 'onBarcodeScanned',
+      listenerFunc: OnBarcodeScannedCallback,
+  ): Promise<PluginListenerHandle> & PluginListenerHandle;
 
   /**
-   * Set a callback to be called when any unhandled key is pressed.
+   *
    */
-  setDebugHandler(callback: DebugHandlerCallback): Promise<CallbackID>;
-
-  /**
-   * Remove a callback set by `setDebugHandler`.
-   */
-  removeDebugHandler(): Promise<void>;
+  addListener(
+      eventName: 'onDebug',
+      listenerFunc: OnDebugCallback,
+  ): Promise<PluginListenerHandle> & PluginListenerHandle;
 }

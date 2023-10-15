@@ -24,29 +24,32 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum HandleableKeyEnum implements Labeled {
-    Esc("ESC"),
-    F1("F1"),
-    F2("F2"),
-    F3("F3"),
-    F4("F4"),
-    F5("F5"),
-    F6("F6"),
-    F7("F7"),
-    F8("F8"),
-    F9("F9"),
-    F10("F10"),
-    Delete("DELETE"),
-    Home("HOME"),
-    End("END"),
-    PgUp("PGUP"),
-    PgDn("PGDN"),
-    Cash("CASH"),
+    Sunmi89KeyKeyboard_Esc("89_ESC"),
+    Sunmi89KeyKeyboard_F1("89_F1"),
+    Sunmi89KeyKeyboard_F2("89_F2"),
+    Sunmi89KeyKeyboard_F3("89_F3"),
+    Sunmi89KeyKeyboard_F4("89_F4"),
+    Sunmi89KeyKeyboard_F5("89_F5"),
+    Sunmi89KeyKeyboard_F6("89_F6"),
+    Sunmi89KeyKeyboard_F7("89_F7"),
+    Sunmi89KeyKeyboard_F8("89_F8"),
+    Sunmi89KeyKeyboard_F9("89_F9"),
+    Sunmi89KeyKeyboard_F10("89_F10"),
+    Sunmi89KeyKeyboard_Delete("89_DELETE"),
+    Sunmi89KeyKeyboard_Home("89_HOME"),
+    Sunmi89KeyKeyboard_End("89_END"),
+    Sunmi89KeyKeyboard_PgUp("89_PGUP"),
+    Sunmi89KeyKeyboard_PgDn("89_PGDN"),
+    Sunmi89KeyKeyboard_Cash("89_CASH"),
 
     L2s_Shortcut("L2S_SHORTCUT"),
     L2k_Shortcut("L2K_SHORTCUT"),
-    RFID("RFID"),
+    Sunmi_RFID("RFID"),
 
-    Barcode("BARCODE"),
+    Barcode_Any("BARCODE"),
+    Barcode_BuiltIn("BARCODE_BUILTIN"),
+    Barcode_Handheld("BARCODE_HANDHELD"),
+    Barcode_Blink("BARCODE_BLINK"),
 
     Debug("DEBUG");
 
@@ -85,86 +88,48 @@ public enum HandleableKeyEnum implements Labeled {
     }
 
     public static int getKeyCode(HandleableKeyEnum from) throws RuntimeException {
-        switch (from) {
-            case Esc:
-                return KEYCODE_ESCAPE;
-            case F1:
-                return KEYCODE_F1;
-            case F2:
-                return KEYCODE_F2;
-            case F3:
-                return KEYCODE_F3;
-            case F4:
-                return KEYCODE_F4;
-            case F5:
-                return KEYCODE_F5;
-            case F6:
-                return KEYCODE_F6;
-            case F7:
-                return KEYCODE_F7;
-            case F8:
-                return KEYCODE_F8;
-            case F9:
-                return KEYCODE_F9;
-            case F10:
-                return KEYCODE_F10;
-            case Delete:
-                return KEYCODE_FORWARD_DEL;
-            case Home:
-                return KEYCODE_MOVE_HOME;
-            case End:
-                return KEYCODE_MOVE_END;
-            case PgUp:
-                return KEYCODE_PAGE_UP;
-            case PgDn:
-                return KEYCODE_PAGE_DOWN;
-            case Cash:
-                return KEYCODE_HENKAN;
-
-            default:
-                throw new RuntimeException("Invalid key");
-        }
+        return switch (from) {
+            case Sunmi89KeyKeyboard_Esc -> KEYCODE_ESCAPE;
+            case Sunmi89KeyKeyboard_F1 -> KEYCODE_F1;
+            case Sunmi89KeyKeyboard_F2 -> KEYCODE_F2;
+            case Sunmi89KeyKeyboard_F3 -> KEYCODE_F3;
+            case Sunmi89KeyKeyboard_F4 -> KEYCODE_F4;
+            case Sunmi89KeyKeyboard_F5 -> KEYCODE_F5;
+            case Sunmi89KeyKeyboard_F6 -> KEYCODE_F6;
+            case Sunmi89KeyKeyboard_F7 -> KEYCODE_F7;
+            case Sunmi89KeyKeyboard_F8 -> KEYCODE_F8;
+            case Sunmi89KeyKeyboard_F9 -> KEYCODE_F9;
+            case Sunmi89KeyKeyboard_F10 -> KEYCODE_F10;
+            case Sunmi89KeyKeyboard_Delete -> KEYCODE_FORWARD_DEL;
+            case Sunmi89KeyKeyboard_Home -> KEYCODE_MOVE_HOME;
+            case Sunmi89KeyKeyboard_End -> KEYCODE_MOVE_END;
+            case Sunmi89KeyKeyboard_PgUp -> KEYCODE_PAGE_UP;
+            case Sunmi89KeyKeyboard_PgDn -> KEYCODE_PAGE_DOWN;
+            case Sunmi89KeyKeyboard_Cash -> KEYCODE_HENKAN;
+            default -> throw new RuntimeException("Invalid key");
+        };
     }
 
     public static HandleableKeyEnum getHandleableKeyEnum(int from) throws RuntimeException {
-        switch (from) {
-            case KEYCODE_PAGE_DOWN:
-                return HandleableKeyEnum.PgDn;
-            case KEYCODE_PAGE_UP:
-                return HandleableKeyEnum.PgUp;
-            case KEYCODE_MOVE_END:
-                return HandleableKeyEnum.End;
-            case KEYCODE_MOVE_HOME:
-                return HandleableKeyEnum.Home;
-            case KEYCODE_FORWARD_DEL:
-                return HandleableKeyEnum.Delete;
-            case KEYCODE_F1:
-                return HandleableKeyEnum.F1;
-            case KEYCODE_F2:
-                return HandleableKeyEnum.F2;
-            case KEYCODE_F3:
-                return HandleableKeyEnum.F3;
-            case KEYCODE_F4:
-                return HandleableKeyEnum.F4;
-            case KEYCODE_F5:
-                return HandleableKeyEnum.F5;
-            case KEYCODE_F6:
-                return HandleableKeyEnum.F6;
-            case KEYCODE_F7:
-                return HandleableKeyEnum.F7;
-            case KEYCODE_F8:
-                return HandleableKeyEnum.F8;
-            case KEYCODE_F9:
-                return HandleableKeyEnum.F9;
-            case KEYCODE_F10:
-                return HandleableKeyEnum.F10;
-            case KEYCODE_ESCAPE:
-                return HandleableKeyEnum.Esc;
-            case KEYCODE_HENKAN:
-                return HandleableKeyEnum.Cash;
-
-            default:
-                throw new RuntimeException("Invalid key");
-        }
+        return switch (from) {
+            case KEYCODE_PAGE_DOWN -> HandleableKeyEnum.Sunmi89KeyKeyboard_PgDn;
+            case KEYCODE_PAGE_UP -> HandleableKeyEnum.Sunmi89KeyKeyboard_PgUp;
+            case KEYCODE_MOVE_END -> HandleableKeyEnum.Sunmi89KeyKeyboard_End;
+            case KEYCODE_MOVE_HOME -> HandleableKeyEnum.Sunmi89KeyKeyboard_Home;
+            case KEYCODE_FORWARD_DEL -> HandleableKeyEnum.Sunmi89KeyKeyboard_Delete;
+            case KEYCODE_F1 -> HandleableKeyEnum.Sunmi89KeyKeyboard_F1;
+            case KEYCODE_F2 -> HandleableKeyEnum.Sunmi89KeyKeyboard_F2;
+            case KEYCODE_F3 -> HandleableKeyEnum.Sunmi89KeyKeyboard_F3;
+            case KEYCODE_F4 -> HandleableKeyEnum.Sunmi89KeyKeyboard_F4;
+            case KEYCODE_F5 -> HandleableKeyEnum.Sunmi89KeyKeyboard_F5;
+            case KEYCODE_F6 -> HandleableKeyEnum.Sunmi89KeyKeyboard_F6;
+            case KEYCODE_F7 -> HandleableKeyEnum.Sunmi89KeyKeyboard_F7;
+            case KEYCODE_F8 -> HandleableKeyEnum.Sunmi89KeyKeyboard_F8;
+            case KEYCODE_F9 -> HandleableKeyEnum.Sunmi89KeyKeyboard_F9;
+            case KEYCODE_F10 -> HandleableKeyEnum.Sunmi89KeyKeyboard_F10;
+            case KEYCODE_ESCAPE -> HandleableKeyEnum.Sunmi89KeyKeyboard_Esc;
+            case KEYCODE_HENKAN -> HandleableKeyEnum.Sunmi89KeyKeyboard_Cash;
+            default -> throw new RuntimeException("Invalid key");
+        };
     }
 }

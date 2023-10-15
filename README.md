@@ -47,12 +47,12 @@ public class MainActivity extends BridgeActivity implements HasKeyHandlersInterf
 
 <docgen-index>
 
-* [`setKeyHandler(...)`](#setkeyhandler)
-* [`removeKeyHandler(...)`](#removekeyhandler)
-* [`setBarcodeHandler(...)`](#setbarcodehandler)
-* [`removeBarcodeHandler()`](#removebarcodehandler)
-* [`setDebugHandler(...)`](#setdebughandler)
-* [`removeDebugHandler()`](#removedebughandler)
+* [`enableHandler(...)`](#enablehandler)
+* [`disableHandler(...)`](#disablehandler)
+* [`addListener('onKeyPressed', ...)`](#addlisteneronkeypressed)
+* [`addListener('onBarcodeScanned', ...)`](#addlisteneronbarcodescanned)
+* [`addListener('onDebug', ...)`](#addlistenerondebug)
+* [Interfaces](#interfaces)
 * [Type Aliases](#type-aliases)
 * [Enums](#enums)
 
@@ -61,28 +61,25 @@ public class MainActivity extends BridgeActivity implements HasKeyHandlersInterf
 <docgen-api>
 <!--Update the source file JSDoc comments and rerun docgen to update the docs below-->
 
-### setKeyHandler(...)
+### enableHandler(...)
 
 ```typescript
-setKeyHandler(options: { key: HandleableKey; }, callback: KeyHandlerCallback) => Promise<CallbackID>
+enableHandler(options: { key: HandleableKey; }) => Promise<void>
 ```
 
 Set a callback to be called when a key specified in `key` parameter is pressed.
 
-| Param          | Type                                                              |
-| -------------- | ----------------------------------------------------------------- |
-| **`options`**  | <code>{ key: <a href="#handleablekey">HandleableKey</a>; }</code> |
-| **`callback`** | <code><a href="#keyhandlercallback">KeyHandlerCallback</a></code> |
-
-**Returns:** <code>Promise&lt;string&gt;</code>
+| Param         | Type                                                              |
+| ------------- | ----------------------------------------------------------------- |
+| **`options`** | <code>{ key: <a href="#handleablekey">HandleableKey</a>; }</code> |
 
 --------------------
 
 
-### removeKeyHandler(...)
+### disableHandler(...)
 
 ```typescript
-removeKeyHandler(options: { key: HandleableKey; }) => Promise<void>
+disableHandler(options: { key: HandleableKey; }) => Promise<void>
 ```
 
 Remove a callback set by `setKeyHandler` for a key specified in `key` parameter.
@@ -94,81 +91,78 @@ Remove a callback set by `setKeyHandler` for a key specified in `key` parameter.
 --------------------
 
 
-### setBarcodeHandler(...)
+### addListener('onKeyPressed', ...)
 
 ```typescript
-setBarcodeHandler(callback: BarcodeHandlerCallback) => Promise<CallbackID>
+addListener(eventName: 'onKeyPressed', listenerFunc: OnKeyPressedCallback) => Promise<PluginListenerHandle> & PluginListenerHandle
 ```
 
-Set a callback to be called when a barcode is scanned.
+| Param              | Type                                                                  |
+| ------------------ | --------------------------------------------------------------------- |
+| **`eventName`**    | <code>'onKeyPressed'</code>                                           |
+| **`listenerFunc`** | <code><a href="#onkeypressedcallback">OnKeyPressedCallback</a></code> |
 
-| Param          | Type                                                                      |
-| -------------- | ------------------------------------------------------------------------- |
-| **`callback`** | <code><a href="#barcodehandlercallback">BarcodeHandlerCallback</a></code> |
-
-**Returns:** <code>Promise&lt;string&gt;</code>
+**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt; & <a href="#pluginlistenerhandle">PluginListenerHandle</a></code>
 
 --------------------
 
 
-### removeBarcodeHandler()
+### addListener('onBarcodeScanned', ...)
 
 ```typescript
-removeBarcodeHandler() => Promise<void>
+addListener(eventName: 'onBarcodeScanned', listenerFunc: OnBarcodeScannedCallback) => Promise<PluginListenerHandle> & PluginListenerHandle
 ```
 
-Remove a callback set by `setBarcodeHandler`.
+| Param              | Type                                                                          |
+| ------------------ | ----------------------------------------------------------------------------- |
+| **`eventName`**    | <code>'onBarcodeScanned'</code>                                               |
+| **`listenerFunc`** | <code><a href="#onbarcodescannedcallback">OnBarcodeScannedCallback</a></code> |
+
+**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt; & <a href="#pluginlistenerhandle">PluginListenerHandle</a></code>
 
 --------------------
 
 
-### setDebugHandler(...)
+### addListener('onDebug', ...)
 
 ```typescript
-setDebugHandler(callback: DebugHandlerCallback) => Promise<CallbackID>
+addListener(eventName: 'onDebug', listenerFunc: OnDebugCallback) => Promise<PluginListenerHandle> & PluginListenerHandle
 ```
 
-Set a callback to be called when any unhandled key is pressed.
+| Param              | Type                                                        |
+| ------------------ | ----------------------------------------------------------- |
+| **`eventName`**    | <code>'onDebug'</code>                                      |
+| **`listenerFunc`** | <code><a href="#ondebugcallback">OnDebugCallback</a></code> |
 
-| Param          | Type                                                                  |
-| -------------- | --------------------------------------------------------------------- |
-| **`callback`** | <code><a href="#debughandlercallback">DebugHandlerCallback</a></code> |
-
-**Returns:** <code>Promise&lt;string&gt;</code>
+**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt; & <a href="#pluginlistenerhandle">PluginListenerHandle</a></code>
 
 --------------------
 
 
-### removeDebugHandler()
+### Interfaces
 
-```typescript
-removeDebugHandler() => Promise<void>
-```
 
-Remove a callback set by `setDebugHandler`.
+#### PluginListenerHandle
 
---------------------
+| Prop         | Type                                      |
+| ------------ | ----------------------------------------- |
+| **`remove`** | <code>() =&gt; Promise&lt;void&gt;</code> |
 
 
 ### Type Aliases
 
 
-#### KeyHandlerCallback
+#### OnKeyPressedCallback
 
 <code>(data: { key: <a href="#handleablekey">HandleableKey</a>; modifiers: ModifierKey[]; type: <a href="#keyevent">KeyEvent</a>; }): void</code>
 
 
-#### CallbackID
-
-<code>string</code>
-
-
-#### BarcodeHandlerCallback
+#### OnBarcodeScannedCallback
 
 <code>(data: { barcode: string; device: { type: string; id: number; }; }): void</code>
 
 
-#### DebugHandlerCallback
+#### OnDebugCallback
 
 <code>(data: any): void</code>
 
@@ -178,28 +172,33 @@ Remove a callback set by `setDebugHandler`.
 
 #### HandleableKey
 
-| Members            | Value                       |
-| ------------------ | --------------------------- |
-| **`Esc`**          | <code>"ESC"</code>          |
-| **`F1`**           | <code>"F1"</code>           |
-| **`F2`**           | <code>"F2"</code>           |
-| **`F3`**           | <code>"F3"</code>           |
-| **`F4`**           | <code>"F4"</code>           |
-| **`F5`**           | <code>"F5"</code>           |
-| **`F6`**           | <code>"F6"</code>           |
-| **`F7`**           | <code>"F7"</code>           |
-| **`F8`**           | <code>"F8"</code>           |
-| **`F9`**           | <code>"F9"</code>           |
-| **`F10`**          | <code>"F10"</code>          |
-| **`Delete`**       | <code>"DELETE"</code>       |
-| **`Home`**         | <code>"HOME"</code>         |
-| **`End`**          | <code>"END"</code>          |
-| **`PgUp`**         | <code>"PGUP"</code>         |
-| **`PgDn`**         | <code>"PGDN"</code>         |
-| **`Cash`**         | <code>"CASH"</code>         |
-| **`L2s_Shortcut`** | <code>"L2S_SHORTCUT"</code> |
-| **`L2k_Shortcut`** | <code>"L2K_SHORTCUT"</code> |
-| **`RFID`**         | <code>"RFID"</code>         |
+| Members                         | Value                           |
+| ------------------------------- | ------------------------------- |
+| **`Sunmi89KeyKeyboard_Esc`**    | <code>"89_ESC"</code>           |
+| **`Sunmi89KeyKeyboard_F1`**     | <code>"89_F1"</code>            |
+| **`Sunmi89KeyKeyboard_F2`**     | <code>"89_F2"</code>            |
+| **`Sunmi89KeyKeyboard_F3`**     | <code>"89_F3"</code>            |
+| **`Sunmi89KeyKeyboard_F4`**     | <code>"89_F4"</code>            |
+| **`Sunmi89KeyKeyboard_F5`**     | <code>"89_F5"</code>            |
+| **`Sunmi89KeyKeyboard_F6`**     | <code>"89_F6"</code>            |
+| **`Sunmi89KeyKeyboard_F7`**     | <code>"89_F7"</code>            |
+| **`Sunmi89KeyKeyboard_F8`**     | <code>"89_F8"</code>            |
+| **`Sunmi89KeyKeyboard_F9`**     | <code>"89_F9"</code>            |
+| **`Sunmi89KeyKeyboard_F10`**    | <code>"89_F10"</code>           |
+| **`Sunmi89KeyKeyboard_Delete`** | <code>"89_DELETE"</code>        |
+| **`Sunmi89KeyKeyboard_Home`**   | <code>"89_HOME"</code>          |
+| **`Sunmi89KeyKeyboard_End`**    | <code>"89_END"</code>           |
+| **`Sunmi89KeyKeyboard_PgUp`**   | <code>"89_PGUP"</code>          |
+| **`Sunmi89KeyKeyboard_PgDn`**   | <code>"89_PGDN"</code>          |
+| **`Sunmi89KeyKeyboard_Cash`**   | <code>"89_CASH"</code>          |
+| **`L2s_Shortcut`**              | <code>"L2S_SHORTCUT"</code>     |
+| **`L2k_Shortcut`**              | <code>"L2K_SHORTCUT"</code>     |
+| **`Sunmi_RFID`**                | <code>"RFID"</code>             |
+| **`Barcode_Any`**               | <code>"BARCODE"</code>          |
+| **`Barcode_BuiltIn`**           | <code>"BARCODE_BUILTIN"</code>  |
+| **`Barcode_Handheld`**          | <code>"BARCODE_HANDHELD"</code> |
+| **`Barcode_Blink`**             | <code>"BARCODE_BLINK"</code>    |
+| **`Debug`**                     | <code>"DEBUG"</code>            |
 
 
 #### ModifierKey
