@@ -29,6 +29,7 @@ import dev.duma.capacitor.sunmikeyboardhandler.handlers.SunmiL2KNumPadHandler;
 import dev.duma.capacitor.sunmikeyboardhandler.handlers.SunmiL2KsKeyboardKeyHandler;
 import dev.duma.capacitor.sunmikeyboardhandler.handlers.SunmiL2KsNumPadHandler;
 import dev.duma.capacitor.sunmikeyboardhandler.handlers.SunmiL2kShortcutKeyHandler;
+import dev.duma.capacitor.sunmikeyboardhandler.handlers.SunmiL2ksShortcutKeyHandler;
 import dev.duma.capacitor.sunmikeyboardhandler.handlers.SunmiL2sShortcutKeyHandler;
 import dev.duma.capacitor.sunmikeyboardhandler.handlers.SunmiRfidKeyHandler;
 
@@ -107,6 +108,7 @@ public class SunmiKeyboardHandlerPlugin extends Plugin implements KeyHandlerInte
     protected List<IHandler> allKeyHandlers = new ArrayList<>(Arrays.asList(
             new SunmiL2sShortcutKeyHandler(callback),
             new SunmiL2kShortcutKeyHandler(callback),
+            new SunmiL2ksShortcutKeyHandler(callback),
             new SunmiRfidKeyHandler(callback),
 
             new SunmiL2KKeyboardKeyHandler(callback),

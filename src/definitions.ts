@@ -80,6 +80,10 @@ export enum HandleableKey {
 
   L2s_Shortcut = "L2S_SHORTCUT",
   L2K_Shortcut = "L2K_SHORTCUT",
+  /**
+   * Defaultly is assigned to turning on/off the screen. To use it as a shortcut key, you need to remap it to "system action" in "custom keys" settings panel.
+   */
+  L2Ks_Shortcut = "L2KS_SHORTCUT",
   RFID = "RFID",
 
   Barcode_Any = "BARCODE",

@@ -178,6 +178,7 @@ public enum HandleableKeyEnum implements Labeled {
 
     L2s_Shortcut("L2S_SHORTCUT"),
     L2k_Shortcut("L2K_SHORTCUT"),
+    L2ks_Shortcut("L2KS_SHORTCUT"),
     Sunmi_RFID("RFID"),
 
     Barcode_Any("BARCODE"),

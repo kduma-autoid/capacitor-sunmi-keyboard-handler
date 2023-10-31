@@ -110,6 +110,7 @@ window.customElements.define(
 
             SunmiKeyboardHandler.enableHandler({key: HandleableKey.L2s_Shortcut}),
             SunmiKeyboardHandler.enableHandler({key: HandleableKey.L2K_Shortcut}),
+            SunmiKeyboardHandler.enableHandler({key: HandleableKey.L2Ks_Shortcut}),
 
             SunmiKeyboardHandler.enableHandler({key: HandleableKey.RFID}),
 
