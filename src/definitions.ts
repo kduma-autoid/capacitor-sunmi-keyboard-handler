@@ -79,6 +79,7 @@ export enum HandleableKey {
   L2K_CENTER = "L2K_CENTER",
 
   L2s_Shortcut = "L2S_SHORTCUT",
+  L2H_Shortcut = "L2H_SHORTCUT",
   L2K_Shortcut = "L2K_SHORTCUT",
   /**
    * Defaultly is assigned to turning on/off the screen. To use it as a shortcut key, you need to remap it to "system action" in "custom keys" settings panel.
