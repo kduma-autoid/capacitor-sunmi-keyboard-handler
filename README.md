@@ -53,6 +53,7 @@ public class MainActivity extends BridgeActivity implements HasKeyHandlersInterf
 * [`addListener('onBarcodeScanned', ...)`](#addlisteneronbarcodescanned)
 * [`addListener('onDebug', ...)`](#addlistenerondebug)
 * [`addListener('onKeyboardInput', ...)`](#addlisteneronkeyboardinput)
+* [`removeAllListeners()`](#removealllisteners)
 * [Interfaces](#interfaces)
 * [Type Aliases](#type-aliases)
 * [Enums](#enums)
@@ -95,7 +96,7 @@ Remove a callback set by `setKeyHandler` for a key specified in `key` parameter.
 ### addListener('onKeyPressed', ...)
 
 ```typescript
-addListener(eventName: 'onKeyPressed', listenerFunc: OnKeyPressedCallback) => Promise<PluginListenerHandle> & PluginListenerHandle
+addListener(eventName: 'onKeyPressed', listenerFunc: OnKeyPressedCallback) => Promise<PluginListenerHandle>
 ```
 
 | Param              | Type                                                                  |
@@ -103,7 +104,7 @@ addListener(eventName: 'onKeyPressed', listenerFunc: OnKeyPressedCallback) => Pr
 | **`eventName`**    | <code>'onKeyPressed'</code>                                           |
 | **`listenerFunc`** | <code><a href="#onkeypressedcallback">OnKeyPressedCallback</a></code> |
 
-**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt; & <a href="#pluginlistenerhandle">PluginListenerHandle</a></code>
+**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
 
 --------------------
 
@@ -111,7 +112,7 @@ addListener(eventName: 'onKeyPressed', listenerFunc: OnKeyPressedCallback) => Pr
 ### addListener('onBarcodeScanned', ...)
 
 ```typescript
-addListener(eventName: 'onBarcodeScanned', listenerFunc: OnBarcodeScannedCallback) => Promise<PluginListenerHandle> & PluginListenerHandle
+addListener(eventName: 'onBarcodeScanned', listenerFunc: OnBarcodeScannedCallback) => Promise<PluginListenerHandle>
 ```
 
 | Param              | Type                                                                          |
@@ -119,7 +120,7 @@ addListener(eventName: 'onBarcodeScanned', listenerFunc: OnBarcodeScannedCallbac
 | **`eventName`**    | <code>'onBarcodeScanned'</code>                                               |
 | **`listenerFunc`** | <code><a href="#onbarcodescannedcallback">OnBarcodeScannedCallback</a></code> |
 
-**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt; & <a href="#pluginlistenerhandle">PluginListenerHandle</a></code>
+**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
 
 --------------------
 
@@ -127,7 +128,7 @@ addListener(eventName: 'onBarcodeScanned', listenerFunc: OnBarcodeScannedCallbac
 ### addListener('onDebug', ...)
 
 ```typescript
-addListener(eventName: 'onDebug', listenerFunc: OnDebugCallback) => Promise<PluginListenerHandle> & PluginListenerHandle
+addListener(eventName: 'onDebug', listenerFunc: OnDebugCallback) => Promise<PluginListenerHandle>
 ```
 
 | Param              | Type                                                        |
@@ -135,7 +136,7 @@ addListener(eventName: 'onDebug', listenerFunc: OnDebugCallback) => Promise<Plug
 | **`eventName`**    | <code>'onDebug'</code>                                      |
 | **`listenerFunc`** | <code><a href="#ondebugcallback">OnDebugCallback</a></code> |
 
-**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt; & <a href="#pluginlistenerhandle">PluginListenerHandle</a></code>
+**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
 
 --------------------
 
@@ -143,7 +144,7 @@ addListener(eventName: 'onDebug', listenerFunc: OnDebugCallback) => Promise<Plug
 ### addListener('onKeyboardInput', ...)
 
 ```typescript
-addListener(eventName: 'onKeyboardInput', listenerFunc: OnKeyboardInputCallback) => Promise<PluginListenerHandle> & PluginListenerHandle
+addListener(eventName: 'onKeyboardInput', listenerFunc: OnKeyboardInputCallback) => Promise<PluginListenerHandle>
 ```
 
 | Param              | Type                                                                        |
@@ -151,7 +152,18 @@ addListener(eventName: 'onKeyboardInput', listenerFunc: OnKeyboardInputCallback)
 | **`eventName`**    | <code>'onKeyboardInput'</code>                                              |
 | **`listenerFunc`** | <code><a href="#onkeyboardinputcallback">OnKeyboardInputCallback</a></code> |
 
-**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt; & <a href="#pluginlistenerhandle">PluginListenerHandle</a></code>
+**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
+
+--------------------
+
+
+### removeAllListeners()
+
+```typescript
+removeAllListeners() => Promise<void>
+```
+
+Removes all listeners
 
 --------------------
 
