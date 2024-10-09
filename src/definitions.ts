@@ -201,7 +201,7 @@ export interface SunmiKeyboardHandlerPlugin {
   addListener(
       eventName: 'onKeyPressed',
       listenerFunc: OnKeyPressedCallback,
-  ): Promise<PluginListenerHandle> & PluginListenerHandle;
+  ): Promise<PluginListenerHandle>;
 
   /**
    *
@@ -209,7 +209,7 @@ export interface SunmiKeyboardHandlerPlugin {
   addListener(
       eventName: 'onBarcodeScanned',
       listenerFunc: OnBarcodeScannedCallback,
-  ): Promise<PluginListenerHandle> & PluginListenerHandle;
+  ): Promise<PluginListenerHandle>;
 
   /**
    *
@@ -217,7 +217,7 @@ export interface SunmiKeyboardHandlerPlugin {
   addListener(
       eventName: 'onDebug',
       listenerFunc: OnDebugCallback,
-  ): Promise<PluginListenerHandle> & PluginListenerHandle;
+  ): Promise<PluginListenerHandle>;
 
   /**
    *
@@ -225,5 +225,10 @@ export interface SunmiKeyboardHandlerPlugin {
   addListener(
       eventName: 'onKeyboardInput',
       listenerFunc: OnKeyboardInputCallback,
-  ): Promise<PluginListenerHandle> & PluginListenerHandle;
+  ): Promise<PluginListenerHandle>;
+
+  /**
+   * Removes all listeners
+   */
+  removeAllListeners(): Promise<void>;
 }
