@@ -188,7 +188,7 @@ Removes all listeners
 
 #### OnBarcodeScannedCallback
 
-<code>(data: { barcode: string; device: { type: string; id: number; }; }): void</code>
+<code>(data: { barcode: string; device: { type: <a href="#barcodescansourcedevice">BarcodeScanSourceDevice</a>; id: number; }; }): void</code>
 
 
 #### OnDebugCallback
@@ -290,6 +290,7 @@ Removes all listeners
 | **`Barcode_BuiltIn`**                   | <code>"BARCODE_BUILTIN"</code>   |                                                                                                                                                           |
 | **`Barcode_Handheld`**                  | <code>"BARCODE_HANDHELD"</code>  |                                                                                                                                                           |
 | **`Barcode_Blink`**                     | <code>"BARCODE_BLINK"</code>     |                                                                                                                                                           |
+| **`Barcode_ProGlove`**                  | <code>"BARCODE_PROGLOVE"</code>  |                                                                                                                                                           |
 | **`Debug`**                             | <code>"DEBUG"</code>             |                                                                                                                                                           |
 | **`Sunmi89KeyKeyboard_Grave`**          | <code>"89_GRAVE"</code>          |                                                                                                                                                           |
 | **`Sunmi89KeyKeyboard_Tab`**            | <code>"89_TAB"</code>            |                                                                                                                                                           |
@@ -380,5 +381,15 @@ Removes all listeners
 | ------------- | ----------------------- |
 | **`KeyDown`** | <code>"KEY_DOWN"</code> |
 | **`KeyUp`**   | <code>"KEY_UP"</code>   |
+
+
+#### BarcodeScanSourceDevice
+
+| Members        | Value                        |
+| -------------- | ---------------------------- |
+| **`BuiltIn`**  | <code>"sunmi_builtin"</code> |
+| **`Handheld`** | <code>"sunmi_scanner"</code> |
+| **`Blink`**    | <code>"sunmi_blink"</code>   |
+| **`ProGlove`** | <code>"proglove"</code>      |
 
 </docgen-api>
