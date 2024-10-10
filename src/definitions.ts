@@ -181,9 +181,17 @@ export enum KeyEvent {
   KeyUp = "KEY_UP",
 }
 
+
+export enum BarcodeScanSourceDevice {
+  BuiltIn = "sunmi_builtin",
+  Handheld = "sunmi_scanner",
+  Blink = "sunmi_blink",
+  ProGlove = "proglove",
+}
+
 export type OnKeyboardInputCallback = (data: { groupKey: HandleableKey, key: HandleableKey, value: string, isWhiteChar: boolean }) => void;
 export type OnKeyPressedCallback = (data: { key: HandleableKey, modifiers: ModifierKey[], type: KeyEvent }) => void;
-export type OnBarcodeScannedCallback = (data: { barcode: string, device: { type: string, id: number } }) => void;
+export type OnBarcodeScannedCallback = (data: { barcode: string, device: { type: BarcodeScanSourceDevice, id: number } }) => void;
 export type OnDebugCallback = (data: any ) => void;
 
 export interface SunmiKeyboardHandlerPlugin {
