@@ -186,6 +186,7 @@ public enum HandleableKeyEnum implements Labeled {
     Barcode_BuiltIn("BARCODE_BUILTIN"),
     Barcode_Handheld("BARCODE_HANDHELD"),
     Barcode_Blink("BARCODE_BLINK"),
+    Barcode_ProGlove("BARCODE_PROGLOVE"),
 
     Debug("DEBUG");
 

@@ -105,6 +105,7 @@ window.customElements.define(
             SunmiKeyboardHandler.enableHandler({key: HandleableKey.Barcode_BuiltIn}),
             SunmiKeyboardHandler.enableHandler({key: HandleableKey.Barcode_Blink}),
             SunmiKeyboardHandler.enableHandler({key: HandleableKey.Barcode_Handheld}),
+            SunmiKeyboardHandler.enableHandler({key: HandleableKey.Barcode_ProGlove}),
 
             SunmiKeyboardHandler.enableHandler({key: HandleableKey.Debug}),
 

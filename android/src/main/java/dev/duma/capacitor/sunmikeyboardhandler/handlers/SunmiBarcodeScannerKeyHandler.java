@@ -8,10 +8,8 @@ import android.util.ArrayMap;
 import android.view.InputDevice;
 import android.view.KeyEvent;
 
-import java.util.Collections;
 import java.util.EnumSet;
 import java.util.Objects;
-import java.util.Set;
 
 import dev.duma.capacitor.sunmikeyboardhandler.enums.HandleableKeyEnum;
 
@@ -43,6 +41,8 @@ public class SunmiBarcodeScannerKeyHandler implements IHandler {
             pressedKey = HandleableKeyEnum.Barcode_Blink;
         } else if(DeviceIdentificationHelper.isSunmiBuiltInScanner(device, event)) {
             pressedKey = HandleableKeyEnum.Barcode_BuiltIn;
+        } else if(DeviceIdentificationHelper.isProGloveScanner(device, event)) {
+            pressedKey = HandleableKeyEnum.Barcode_ProGlove;
         } else {
             return false;
         }
@@ -63,6 +63,8 @@ public class SunmiBarcodeScannerKeyHandler implements IHandler {
             device_name = "sunmi_blink";
         } else if(DeviceIdentificationHelper.isSunmiBuiltInScanner(device, event)) {
             device_name = "sunmi_builtin";
+        } else if(DeviceIdentificationHelper.isProGloveScanner(device, event)) {
+            device_name = "proglove";
         } else {
             return false;
         }
