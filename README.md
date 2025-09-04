@@ -2,6 +2,8 @@
 
 Handler for processing input from Sunmi hardware barcode scanners (builtin and external) and external Sunmi programmable keyboard.
 
+Check full documentation here: [opensource.duma.sh/libraries/capacitor/sunmi-keyboard-handler](https://opensource.duma.sh/libraries/capacitor/sunmi-keyboard-handler)
+
 ## Install
 
 ```bash
